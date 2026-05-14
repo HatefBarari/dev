@@ -1053,6 +1053,8 @@ class Vortem_Admin {
 					'last_modified_label'               => __( 'Last Modified:', 'vortem-ai' ),
 					'references_label'                  => __( 'References:', 'vortem-ai' ),
 					'cwe_label'                         => __( 'CWE:', 'vortem-ai' ),
+					'affected_version_label'            => __( 'Affected Version:', 'vortem-ai' ),
+					'fixed_version_label'               => __( 'Fixed Version:', 'vortem-ai' ),
 					'version_label'                     => __( 'VERSION', 'vortem-ai' ),
 					'author_label'                      => __( 'AUTHOR', 'vortem-ai' ),
 					'requires_wp_label'                 => __( 'REQUIRES WP', 'vortem-ai' ),
@@ -6660,32 +6662,16 @@ class Vortem_Admin {
 
 		// Log theme count for debugging
 
-		// Format themes data according to API requirements - EXACT format from WP_SECURITY_API_CURL_EXAMPLES.txt
-		// Field order must match exactly: stylesheet, template, name, version, status, author, author_uri, theme_uri, description, text_domain, tags
-		// Note: get_theme_data() already returns properly formatted data, so we use it as-is
+		// Format themes for POST /api/v1/customer/security/wordpress/theme (stylesheet, template, name, version, status only).
 		$formatted_themes = array();
 		foreach ( $themes as $theme ) {
-			// Log each theme being formatted (especially for debugging missing themes like "Bootstrap Fitness")
-			$theme_name = isset( $theme['name'] ) ? $theme['name'] : ( isset( $theme['stylesheet'] ) ? $theme['stylesheet'] : 'Unknown' );
-
-			// Format theme data according to API requirements
-			// API example shows: name preserves spaces (e.g., "Twenty Twenty-Four")
-			// API example shows: stylesheet/template must be lowercase (e.g., "twentytwentyfour")
-			$formatted_theme = array(
-				'stylesheet'  => isset( $theme['stylesheet'] ) ? strtolower( (string) $theme['stylesheet'] ) : '',
-				'template'    => isset( $theme['template'] ) ? strtolower( (string) $theme['template'] ) : '',
-				'name'        => isset( $theme['name'] ) ? (string) $theme['name'] : '',
-				'version'     => isset( $theme['version'] ) ? (string) $theme['version'] : '',
-				'status'      => isset( $theme['status'] ) && in_array( $theme['status'], array( 'active', 'inactive' ), true ) ? $theme['status'] : 'inactive',
-				'author'      => isset( $theme['author'] ) ? (string) $theme['author'] : '',
-				'author_uri'  => isset( $theme['author_uri'] ) ? (string) $theme['author_uri'] : '',
-				'theme_uri'   => isset( $theme['theme_uri'] ) ? (string) $theme['theme_uri'] : '',
-				'description' => isset( $theme['description'] ) ? (string) $theme['description'] : '',
-				'text_domain' => isset( $theme['text_domain'] ) ? (string) $theme['text_domain'] : '',
-				'tags'        => isset( $theme['tags'] ) && is_array( $theme['tags'] ) ? array_values( $theme['tags'] ) : array(),
+			$formatted_themes[] = array(
+				'stylesheet' => isset( $theme['stylesheet'] ) ? strtolower( (string) $theme['stylesheet'] ) : '',
+				'template'   => isset( $theme['template'] ) ? strtolower( (string) $theme['template'] ) : '',
+				'name'       => isset( $theme['name'] ) ? (string) $theme['name'] : '',
+				'version'    => isset( $theme['version'] ) ? (string) $theme['version'] : '',
+				'status'     => isset( $theme['status'] ) && in_array( $theme['status'], array( 'active', 'inactive' ), true ) ? $theme['status'] : 'inactive',
 			);
-
-			$formatted_themes[] = $formatted_theme;
 		}
 
 		// Log final count of themes being sent
@@ -6735,13 +6721,10 @@ class Vortem_Admin {
 			}
 		}
 
-		// Send wp-core data (WordPress version)
-		$wp_version_clean = get_bloginfo( 'version' );
-		$current_time     = current_time( 'c' ); // ISO 8601 format
-
+		// Send wp-core data (WordPress version) — POST body matches API spec: only `wordpres-version`.
+		$wp_version_clean     = get_bloginfo( 'version' );
 		$wp_core_request_data = array(
 			'wordpres-version' => $wp_version_clean,
-			'time'             => $current_time,
 		);
 
 		// Get API endpoint for wp-core
@@ -6920,13 +6903,10 @@ class Vortem_Admin {
 			'Referer'      => home_url(),
 		);
 
-		// Send wp-core data (WordPress version) before fetching results
-		$wp_version_clean = get_bloginfo( 'version' );
-		$current_time     = current_time( 'c' ); // ISO 8601 format
-
+		// Send wp-core data before fetching match results (same body as POST /wp-core spec).
+		$wp_version_clean     = get_bloginfo( 'version' );
 		$wp_core_request_data = array(
 			'wordpres-version' => $wp_version_clean,
-			'time'             => $current_time,
 		);
 
 		// Get API endpoint for wp-core POST
@@ -7017,65 +6997,64 @@ class Vortem_Admin {
 			if ( $wp_core_response_code >= 200 && $wp_core_response_code < 300 ) {
 				$wp_core_decoded = json_decode( $wp_core_response_body, true );
 				if ( json_last_error() === JSON_ERROR_NONE && is_array( $wp_core_decoded ) ) {
-					// Process wp-core vulnerabilities
 					foreach ( $wp_core_decoded as $item ) {
 						if ( isset( $item['message'] ) && $item['message'] === 'success' ) {
 							continue;
 						}
-						if ( is_array( $item ) ) {
-							$item['type'] = 'wp-core';
-							// Map wp-core specific fields
-							if ( isset( $item['affects'] ) && is_array( $item['affects'] ) && ! empty( $item['affects'] ) ) {
-								$affect = $item['affects'][0];
-								if ( isset( $affect['fixed_in'] ) ) {
-									$item['fixed_in'] = $affect['fixed_in'];
-								}
-							}
-							// Extract CVSS from classification
-							if ( isset( $item['classification'] ) && is_array( $item['classification'] ) ) {
-								foreach ( $item['classification'] as $class ) {
-									if ( isset( $class['key'] ) && $class['key'] === 'CVSS' && isset( $class['value'] ) ) {
-										$item['cvss'] = $class['value'];
-										// Extract severity from CVSS value (e.g., "2.7 (low)")
-										if ( preg_match( '/\(([^)]+)\)/', $class['value'], $matches ) ) {
-											$item['severity'] = strtoupper( $matches[1] );
-										}
-									}
-									if ( isset( $class['key'] ) && $class['key'] === 'CWE' && isset( $class['value'] ) ) {
-										$item['cwe'] = $class['value'];
-									}
-								}
-							}
-							// Extract timeline dates
-							if ( isset( $item['timeline'] ) && is_array( $item['timeline'] ) ) {
-								foreach ( $item['timeline'] as $timeline ) {
-									if ( isset( $timeline['key'] ) && $timeline['key'] === 'Publicly Published' && isset( $timeline['value'] ) ) {
-										// Extract date from value (e.g., "2025-09-22 (about 2 months ago)")
-										if ( preg_match( '/(\d{4}-\d{2}-\d{2})/', $timeline['value'], $matches ) ) {
-											$item['published'] = $matches[1];
-										}
-									}
-									if ( isset( $timeline['key'] ) && $timeline['key'] === 'Last Updated' && isset( $timeline['value'] ) ) {
-										if ( preg_match( '/(\d{4}-\d{2}-\d{2})/', $timeline['value'], $matches ) ) {
-											$item['lastModified'] = $matches[1];
-										}
-									}
-								}
-							}
-							// Set source URL as reference
-							if ( isset( $item['source_url'] ) ) {
-								$item['references'] = array( $item['source_url'] );
-							}
-							// Set WPVDB ID as CVE ID if available
-							if ( isset( $item['miscellaneous'] ) && is_array( $item['miscellaneous'] ) ) {
-								foreach ( $item['miscellaneous'] as $misc ) {
-									if ( isset( $misc['key'] ) && $misc['key'] === 'WPVDB ID' && isset( $misc['value'] ) ) {
-										$item['cve_id'] = 'WPVDB-' . $misc['value'];
-									}
-								}
-							}
-							$all_vulnerabilities[] = $item;
+						if ( ! is_array( $item ) ) {
+							continue;
 						}
+						// Flat GET .../wp-core/match (cve, customer_wordpress_version, cvss_score, type "core", etc.).
+						if ( $this->is_flat_wp_core_match_item( $item ) ) {
+							$all_vulnerabilities[] = $this->normalize_wp_core_vulnerability( $item );
+							continue;
+						}
+						// Legacy nested payload (classification, affects, timeline).
+						$item['type'] = 'wp-core';
+						if ( isset( $item['affects'] ) && is_array( $item['affects'] ) && ! empty( $item['affects'] ) ) {
+							$affect = $item['affects'][0];
+							if ( isset( $affect['fixed_in'] ) ) {
+								$item['fixed_in'] = $affect['fixed_in'];
+							}
+						}
+						if ( isset( $item['classification'] ) && is_array( $item['classification'] ) ) {
+							foreach ( $item['classification'] as $class ) {
+								if ( isset( $class['key'] ) && $class['key'] === 'CVSS' && isset( $class['value'] ) ) {
+									$item['cvss'] = $class['value'];
+									if ( preg_match( '/\(([^)]+)\)/', $class['value'], $matches ) ) {
+										$item['severity'] = strtoupper( $matches[1] );
+									}
+								}
+								if ( isset( $class['key'] ) && $class['key'] === 'CWE' && isset( $class['value'] ) ) {
+									$item['cwe'] = $class['value'];
+								}
+							}
+						}
+						if ( isset( $item['timeline'] ) && is_array( $item['timeline'] ) ) {
+							foreach ( $item['timeline'] as $timeline ) {
+								if ( isset( $timeline['key'] ) && $timeline['key'] === 'Publicly Published' && isset( $timeline['value'] ) ) {
+									if ( preg_match( '/(\d{4}-\d{2}-\d{2})/', $timeline['value'], $matches ) ) {
+										$item['published'] = $matches[1];
+									}
+								}
+								if ( isset( $timeline['key'] ) && $timeline['key'] === 'Last Updated' && isset( $timeline['value'] ) ) {
+									if ( preg_match( '/(\d{4}-\d{2}-\d{2})/', $timeline['value'], $matches ) ) {
+										$item['lastModified'] = $matches[1];
+									}
+								}
+							}
+						}
+						if ( isset( $item['source_url'] ) ) {
+							$item['references'] = array( $item['source_url'] );
+						}
+						if ( isset( $item['miscellaneous'] ) && is_array( $item['miscellaneous'] ) ) {
+							foreach ( $item['miscellaneous'] as $misc ) {
+								if ( isset( $misc['key'] ) && $misc['key'] === 'WPVDB ID' && isset( $misc['value'] ) ) {
+									$item['cve_id'] = 'WPVDB-' . $misc['value'];
+								}
+							}
+						}
+						$all_vulnerabilities[] = $item;
 					}
 				}
 			}
@@ -7089,6 +7068,68 @@ class Vortem_Admin {
 	}
 
 	/**
+	 * Whether wp-core/match row is the flat API shape (see customer security wp-core match spec).
+	 *
+	 * @param array $item Decoded JSON object.
+	 * @return bool
+	 */
+	private function is_flat_wp_core_match_item( $item ) {
+		if ( ! is_array( $item ) ) {
+			return false;
+		}
+		$type = isset( $item['type'] ) ? strtolower( (string) $item['type'] ) : '';
+		if ( 'core' === $type && isset( $item['cve'] ) ) {
+			return true;
+		}
+		if ( isset( $item['cve'] ) && array_key_exists( 'customer_wordpress_version', $item ) ) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * Normalize flat wp-core/match vulnerability to the structure used by security.js / security-results.js.
+	 * Preserves API field names (empty strings allowed for description, fixed_version, last_modified per backend).
+	 *
+	 * @param array $item Raw row from GET .../security/wordpress/wp-core/match.
+	 * @return array
+	 */
+	private function normalize_wp_core_vulnerability( $item ) {
+		$cve               = isset( $item['cve'] ) ? (string) $item['cve'] : '';
+		$customer_wp       = array_key_exists( 'customer_wordpress_version', $item ) ? (string) $item['customer_wordpress_version'] : '';
+		$description       = array_key_exists( 'description', $item ) ? (string) $item['description'] : '';
+		$fixed_version     = array_key_exists( 'fixed_version', $item ) ? (string) $item['fixed_version'] : '';
+		$severity_raw      = isset( $item['severity'] ) ? (string) $item['severity'] : 'MEDIUM';
+		$severity          = strtoupper( $severity_raw );
+		if ( ! in_array( $severity, array( 'CRITICAL', 'HIGH', 'MEDIUM', 'LOW' ), true ) ) {
+			$severity = 'MEDIUM';
+		}
+		$last_modified     = array_key_exists( 'last_modified', $item ) ? (string) $item['last_modified'] : '';
+		$published_date    = array_key_exists( 'published_date', $item ) ? (string) $item['published_date'] : '';
+		$cvss_score        = null;
+		if ( array_key_exists( 'cvss_score', $item ) && null !== $item['cvss_score'] && '' !== $item['cvss_score'] ) {
+			$cvss_score = floatval( $item['cvss_score'] );
+		}
+		return array(
+			'type'                         => 'wp-core',
+			'cve'                          => $cve,
+			'cve_id'                       => $cve,
+			'customer_wordpress_version'   => $customer_wp,
+			'description'                  => $description,
+			'fixed_version'                => $fixed_version,
+			'fixed_in'                     => $fixed_version,
+			'severity'                     => $severity,
+			'last_modified'                => $last_modified,
+			'lastModified'                 => $last_modified,
+			'published_date'               => $published_date,
+			'published'                    => $published_date,
+			'cvss_score'                   => $cvss_score,
+			'cvss'                         => $cvss_score,
+			'references'                   => array(),
+		);
+	}
+
+	/**
 	 * Normalize theme vulnerability data to match plugin vulnerability format
 	 * Theme API returns different structure than plugin API, this normalizes it
 	 *
@@ -7099,6 +7140,48 @@ class Vortem_Admin {
 		$normalized = array(
 			'type' => 'theme',
 		);
+
+		// Flat response from GET .../security/wordpress/theme/match (customer_theme_name, cvss_score, published_date, etc.).
+		if ( isset( $item['customer_theme_name'] ) || isset( $item['customer_theme_version'] ) ) {
+			$cve             = isset( $item['cve'] ) ? (string) $item['cve'] : '';
+			$customer_name   = isset( $item['customer_theme_name'] ) ? (string) $item['customer_theme_name'] : '';
+			$customer_ver    = isset( $item['customer_theme_version'] ) ? (string) $item['customer_theme_version'] : '';
+			$description     = array_key_exists( 'description', $item ) ? (string) $item['description'] : '';
+			$fixed_version   = array_key_exists( 'fixed_version', $item ) ? (string) $item['fixed_version'] : '';
+			$severity_raw    = isset( $item['severity'] ) ? (string) $item['severity'] : 'MEDIUM';
+			$severity        = strtoupper( $severity_raw );
+			if ( ! in_array( $severity, array( 'CRITICAL', 'HIGH', 'MEDIUM', 'LOW' ), true ) ) {
+				$severity = 'MEDIUM';
+			}
+			$published_date  = array_key_exists( 'published_date', $item ) ? (string) $item['published_date'] : '';
+			$last_modified   = array_key_exists( 'last_modified', $item ) ? (string) $item['last_modified'] : '';
+			$cvss_score      = null;
+			if ( array_key_exists( 'cvss_score', $item ) && null !== $item['cvss_score'] && '' !== $item['cvss_score'] ) {
+				$cvss_score = floatval( $item['cvss_score'] );
+			}
+
+			$normalized['cve']                    = $cve;
+			$normalized['cve_id']               = $cve;
+			$normalized['customer_theme_name']  = $customer_name;
+			$normalized['customer_theme']        = $customer_name;
+			$normalized['customer_theme_version'] = $customer_ver;
+			$normalized['version']              = $customer_ver;
+			$normalized['description']          = $description;
+			$normalized['fixed_version']      = $fixed_version;
+			$normalized['fixed_in']            = $fixed_version;
+			$normalized['severity']            = $severity;
+			$normalized['cvss_score']         = $cvss_score;
+			$normalized['cvss']               = $cvss_score;
+			$normalized['published_date']     = $published_date;
+			$normalized['published']          = $published_date;
+			$normalized['last_modified']      = $last_modified;
+			$normalized['lastModified']       = $last_modified;
+			$normalized['last_modified_date'] = $last_modified;
+			$normalized['cwe']                = null;
+			$normalized['references']       = array();
+
+			return $normalized;
+		}
 
 		// Map matched_theme to customer_theme
 		if ( isset( $item['matched_theme'] ) && is_array( $item['matched_theme'] ) ) {
@@ -7262,6 +7345,10 @@ class Vortem_Admin {
 		}
 		if ( isset( $item['proof_of_concept'] ) ) {
 			$normalized['proof_of_concept'] = $item['proof_of_concept'];
+		}
+
+		if ( ! empty( $normalized['customer_theme'] ) && empty( $normalized['customer_theme_name'] ) ) {
+			$normalized['customer_theme_name'] = $normalized['customer_theme'];
 		}
 
 		return $normalized;

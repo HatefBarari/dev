@@ -1342,6 +1342,19 @@
 	min-width: 72px; /* prevent layout jump */
 }
 
+.vortem-wp-core-badge.is-clickable {
+	cursor: pointer;
+}
+
+.vortem-wp-core-badge.is-clickable:hover {
+	filter: brightness(0.95);
+}
+
+.vortem-wp-core-badge.is-clickable:focus-visible {
+	outline: 2px solid #F59206;
+	outline-offset: 2px;
+}
+
 .vortem-wp-core-badge.is-loading::after {
 	content: "...";
 	display: inline-block;

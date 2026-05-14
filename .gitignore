@@ -6,6 +6,7 @@ CLAUDE.md
 .DS_Store
 node_modules/
 vendor/
+composer.lock
 phpcs.xml
 phpcs-report.txt
 *.swp
@@ -20,7 +21,3 @@ bin/
 .superpowers/
 
 build-mo.sh
-phpcs.xml.dist
-composer.json
-composer.lock
-docs/

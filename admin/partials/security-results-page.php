@@ -163,9 +163,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<table class="security-results-table" id="vortem-security-results-table">
 					<thead>
 						<tr>
-							<th class="sortable" data-sort="cve_id">
+							<th class="sortable" data-sort="cve">
 								<div class="th-content">
-									<span><?php esc_html_e( 'CVE ID', 'vortem-ai' ); ?></span>
+									<span><?php esc_html_e( 'CVE', 'vortem-ai' ); ?></span>
 									<svg class="sort-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 										<path d="M7 13l5 5 5-5M7 6l5-5 5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 									</svg>
@@ -179,7 +179,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 									</svg>
 								</div>
 							</th>
-							<th class="sortable" data-sort="cvss">
+							<th class="sortable" data-sort="cvss_score">
 								<div class="th-content">
 									<span><?php esc_html_e( 'CVSS Score', 'vortem-ai' ); ?></span>
 									<svg class="sort-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -197,7 +197,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 							</th>
 							<th><?php esc_html_e( 'Plugin', 'vortem-ai' ); ?></th>
 							<th><?php esc_html_e( 'Description', 'vortem-ai' ); ?></th>
-							<th class="sortable" data-sort="published">
+							<th class="sortable" data-sort="published_date">
 								<div class="th-content">
 									<span><?php esc_html_e( 'Published', 'vortem-ai' ); ?></span>
 									<svg class="sort-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -273,14 +273,16 @@ wp_localize_script(
 		'nonce'   => wp_create_nonce( 'vortem_security_results_nonce' ),
 		'ajaxUrl' => admin_url( 'admin-ajax.php' ),
 		'strings' => array(
-			'loading'      => __( 'Loading security data...', 'vortem-ai' ),
-			'error'        => __( 'Failed to load security data', 'vortem-ai' ),
-			'noIssues'     => __( 'No security issues found', 'vortem-ai' ),
-			'viewDetails'  => __( 'View Details', 'vortem-ai' ),
-			'close'        => __( 'Close', 'vortem-ai' ),
-			'references'   => __( 'References', 'vortem-ai' ),
-			'published'    => __( 'Published', 'vortem-ai' ),
-			'lastModified' => __( 'Last Modified', 'vortem-ai' ),
+			'loading'         => __( 'Loading security data...', 'vortem-ai' ),
+			'error'           => __( 'Failed to load security data', 'vortem-ai' ),
+			'noIssues'        => __( 'No security issues found', 'vortem-ai' ),
+			'viewDetails'     => __( 'View Details', 'vortem-ai' ),
+			'close'           => __( 'Close', 'vortem-ai' ),
+			'references'      => __( 'References', 'vortem-ai' ),
+			'published'       => __( 'Published', 'vortem-ai' ),
+			'lastModified'    => __( 'Last Modified', 'vortem-ai' ),
+			'affectedVersion' => __( 'Affected Version', 'vortem-ai' ),
+			'fixedVersion'    => __( 'Fixed Version', 'vortem-ai' ),
 		),
 	)
 );

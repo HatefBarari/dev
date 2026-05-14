@@ -15,6 +15,22 @@
 
 	const config = window.vortemSecurityResultsConfig || {};
 
+	function vortemResultsAffectedItemLabel(item) {
+		const t = item && item.type ? String(item.type).toLowerCase() : '';
+		if (t === 'core' || t === 'wp-core') {
+			return 'WordPress Core';
+		}
+		return item.customer_plugin_name || item.customer_plugin || item.customer_theme || item.customer_theme_name || (item.matched_theme && item.matched_theme.theme_name) || '';
+	}
+
+	function vortemResultsAffectedItemVersion(item) {
+		const t = item && item.type ? String(item.type).toLowerCase() : '';
+		if (t === 'core' || t === 'wp-core') {
+			return item.customer_wordpress_version || '';
+		}
+		return item.customer_plugin_version || item.customer_theme_version || '';
+	}
+
 	$(document).ready(function() {
 		// Load data on page load
 		loadSecurityData();
@@ -229,20 +245,16 @@
 	 * Send themes data to external API
 	 */
 	function sendThemesToAPI(themes, callback) {
-		// Format themes data according to API requirements
 		const formattedThemes = themes.map(function(theme) {
+			const ss = theme.stylesheet != null && theme.stylesheet !== false ? String(theme.stylesheet).toLowerCase() : '';
+			const tpl = theme.template != null && theme.template !== false ? String(theme.template).toLowerCase() : '';
+			const displayName = theme.name != null && theme.name !== false ? String(theme.name) : '';
 			return {
-				stylesheet: theme.stylesheet || '',
-				template: theme.template || '',
-				name: theme.name || '',
-				version: theme.version || '',
-				status: theme.status || 'inactive',
-				author: theme.author || '',
-				author_uri: theme.author_uri || '',
-				theme_uri: theme.theme_uri || '',
-				description: theme.description || '',
-				text_domain: theme.text_domain || '',
-				tags: Array.isArray(theme.tags) ? theme.tags : []
+				stylesheet: ss,
+				template: tpl,
+				name: displayName,
+				version: theme.version != null && theme.version !== false ? String(theme.version) : '',
+				status: (theme.status && (theme.status === 'active' || theme.status === 'inactive')) ? theme.status : 'inactive'
 			};
 		});
 
@@ -331,8 +343,8 @@
 			$issueTypeFilter.append($('<option>').val(cwe).text(cwe));
 		});
 
-		// Populate plugin/theme filter
-		const items = [...new Set(securityData.map(item => item.customer_plugin || item.customer_theme || item.matched_theme?.theme_name).filter(Boolean))];
+		// Populate plugin/theme filter (new spec uses `customer_plugin_name`)
+		const items = [...new Set(securityData.map(function(item) { return vortemResultsAffectedItemLabel(item); }).filter(Boolean))];
 		const $pluginFilter = $('#vortem-security-results-plugin-filter');
 		items.sort().forEach(function(item) {
 			$pluginFilter.append($('<option>').val(item).text(item));
@@ -350,7 +362,7 @@
 
 		filteredData = securityData.filter(function(item) {
 			// Severity filter
-			if (severityFilter !== 'all' && item.severity !== severityFilter) {
+			if (severityFilter !== 'all' && String(item.severity || '').toLowerCase() !== String(severityFilter).toLowerCase()) {
 				return false;
 			}
 
@@ -375,8 +387,8 @@
 				}
 			}
 
-			// Plugin/Theme filter
-			const itemName = item.customer_plugin || item.customer_theme || item.matched_theme?.theme_name;
+			// Plugin/Theme filter (new spec uses `customer_plugin_name`)
+			const itemName = vortemResultsAffectedItemLabel(item);
 			if (pluginFilter !== 'all' && itemName !== pluginFilter) {
 				return false;
 			}
@@ -407,14 +419,35 @@
 		}
 
 		filteredData.sort(function(a, b) {
-			let aVal = a[field];
-			let bVal = b[field];
+			let aVal;
+			let bVal;
+
+			// Map sort fields to the new plugin spec, falling back to legacy names
+			if (field === 'cve_id' || field === 'cve') {
+				aVal = a.cve || a.cve_id;
+				bVal = b.cve || b.cve_id;
+			} else if (field === 'cvss' || field === 'cvss_score') {
+				aVal = a.cvss_score !== undefined ? a.cvss_score : a.cvss;
+				bVal = b.cvss_score !== undefined ? b.cvss_score : b.cvss;
+			} else if (field === 'published' || field === 'published_date') {
+				aVal = a.published_date || a.published;
+				bVal = b.published_date || b.published;
+			} else if (field === 'lastModified' || field === 'last_modified') {
+				aVal = a.last_modified || a.lastModified || a.last_modified_date;
+				bVal = b.last_modified || b.lastModified || b.last_modified_date;
+			} else {
+				aVal = a[field];
+				bVal = b[field];
+			}
 
 			// Handle different data types
-			if (field === 'cvss') {
+			if (field === 'cvss' || field === 'cvss_score') {
 				aVal = parseFloat(aVal) || 0;
 				bVal = parseFloat(bVal) || 0;
-			} else if (field === 'published' || field === 'lastModified') {
+			} else if (
+				field === 'published' || field === 'published_date' ||
+				field === 'lastModified' || field === 'last_modified'
+			) {
 				aVal = new Date(aVal).getTime() || 0;
 				bVal = new Date(bVal).getTime() || 0;
 			} else {
@@ -483,13 +516,14 @@
 
 		paginatedData.forEach(function(item) {
 			const $row = $('<tr>');
-			
-			// CVE ID
+
+			// CVE (new spec uses `cve`; fall back to legacy `cve_id`)
+			const cveValue = item.cve || item.cve_id || '';
 			$row.append($('<td>').addClass('table-cve-id').html(
-				$('<a>').attr('href', 'https://cve.mitre.org/cgi-bin/cvename.cgi?name=' + escapeHtml(item.cve_id))
+				$('<a>').attr('href', 'https://cve.mitre.org/cgi-bin/cvename.cgi?name=' + escapeHtml(cveValue))
 					.attr('target', '_blank')
 					.attr('rel', 'noopener noreferrer')
-					.text(item.cve_id || '—')
+					.text(cveValue || '—')
 			));
 
 			// Severity
@@ -498,8 +532,7 @@
 				$('<span>').addClass('severity-badge').addClass(severityClass).text(item.severity || '—')
 			));
 
-			// CVSS Score
-			// Support both cvss and cvss_score fields
+			// CVSS Score (new spec uses `cvss_score`)
 			const cvssValue = item.cvss_score !== undefined ? item.cvss_score : item.cvss;
 			const cvss = parseFloat(cvssValue) || 0;
 			const scoreClass = cvss >= 9 ? 'score-critical' : cvss >= 7 ? 'score-high' : cvss >= 4 ? 'score-medium' : 'score-low';
@@ -511,9 +544,15 @@
 			// Issue Type (CWE)
 			$row.append($('<td>').addClass('table-cwe').text(item.cwe || '—'));
 
-			// Plugin/Theme
-			const itemName = item.customer_plugin || item.customer_theme || item.matched_theme?.theme_name || '—';
-			$row.append($('<td>').addClass('table-plugin').text(itemName));
+			// Plugin/Theme (new spec uses `customer_plugin_name` and includes `customer_plugin_version`)
+			const itemName = vortemResultsAffectedItemLabel(item) || '—';
+			const itemVersion = vortemResultsAffectedItemVersion(item);
+			const $pluginCell = $('<td>').addClass('table-plugin');
+			$pluginCell.append($('<span>').addClass('plugin-name').text(itemName));
+			if (itemVersion) {
+				$pluginCell.append($('<span>').addClass('plugin-version').text(' v' + itemVersion));
+			}
+			$row.append($pluginCell);
 
 			// Description
 			const description = item.description || '—';
@@ -523,9 +562,9 @@
 				$('<span>').addClass('description-text').text(truncatedDesc)
 			));
 
-			// Published
-			const publishedDate = formatDate(item.published);
-			$row.append($('<td>').addClass('table-published').text(publishedDate));
+			// Published (new spec uses `published_date`)
+			const publishedRaw = item.published_date || item.published;
+			$row.append($('<td>').addClass('table-published').text(formatDate(publishedRaw)));
 
 			// Actions
 			const $actions = $('<td>').addClass('table-actions');
@@ -697,15 +736,16 @@
 		const $modalBody = $('#vortem-security-results-modal-body');
 		const $modalTitle = $('#vortem-security-results-modal-title');
 
-		$modalTitle.text(item.cve_id || 'Security Issue Details');
+		const cveValue = item.cve || item.cve_id || '';
+		$modalTitle.text(cveValue || 'Security Issue Details');
 		$modalBody.empty();
 
 		// Build modal content
 		const content = [];
 		content.push('<div class="modal-detail-row">');
-		content.push('<div class="modal-detail-label">CVE ID:</div>');
+		content.push('<div class="modal-detail-label">CVE:</div>');
 		content.push('<div class="modal-detail-value">');
-		content.push('<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=' + escapeHtml(item.cve_id) + '" target="_blank" rel="noopener noreferrer">' + escapeHtml(item.cve_id || '—') + '</a>');
+		content.push('<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=' + escapeHtml(cveValue) + '" target="_blank" rel="noopener noreferrer">' + escapeHtml(cveValue || '—') + '</a>');
 		content.push('</div>');
 		content.push('</div>');
 
@@ -720,7 +760,7 @@
 		content.push('<div class="modal-detail-row">');
 		content.push('<div class="modal-detail-label">CVSS Score:</div>');
 		content.push('<div class="modal-detail-value">');
-		// Support both cvss and cvss_score fields
+		// New spec uses `cvss_score`; legacy `cvss` kept as fallback
 		const cvssValue = item.cvss_score !== undefined ? item.cvss_score : item.cvss;
 		const cvss = parseFloat(cvssValue) || 0;
 		const scoreClass = cvss >= 9 ? 'score-critical' : cvss >= 7 ? 'score-high' : cvss >= 4 ? 'score-medium' : 'score-low';
@@ -729,30 +769,50 @@
 		content.push('</div>');
 		content.push('</div>');
 
-		content.push('<div class="modal-detail-row">');
-		content.push('<div class="modal-detail-label">Issue Type (CWE):</div>');
-		content.push('<div class="modal-detail-value">' + escapeHtml(item.cwe || '—') + '</div>');
-		content.push('</div>');
+		if (item.cwe) {
+			content.push('<div class="modal-detail-row">');
+			content.push('<div class="modal-detail-label">Issue Type (CWE):</div>');
+			content.push('<div class="modal-detail-value">' + escapeHtml(item.cwe) + '</div>');
+			content.push('</div>');
+		}
 
 		content.push('<div class="modal-detail-row">');
 		content.push('<div class="modal-detail-label">Plugin:</div>');
-		const itemName = item.customer_plugin || item.customer_theme || item.matched_theme?.theme_name || '—';
+		const itemName = item.customer_plugin_name || item.customer_plugin || item.customer_theme || item.customer_theme_name || item.matched_theme?.theme_name || '—';
 		content.push('<div class="modal-detail-value">' + escapeHtml(itemName) + '</div>');
 		content.push('</div>');
+
+		const itemVersion = item.customer_plugin_version || item.customer_theme_version || '';
+		if (itemVersion) {
+			content.push('<div class="modal-detail-row">');
+			content.push('<div class="modal-detail-label">' + (config.strings.affectedVersion || 'Affected Version') + ':</div>');
+			content.push('<div class="modal-detail-value">' + escapeHtml(itemVersion) + '</div>');
+			content.push('</div>');
+		}
+
+		const fixedVersion = item.fixed_version || item.fixed_in || '';
+		if (fixedVersion) {
+			content.push('<div class="modal-detail-row">');
+			content.push('<div class="modal-detail-label">' + (config.strings.fixedVersion || 'Fixed Version') + ':</div>');
+			content.push('<div class="modal-detail-value">' + escapeHtml(fixedVersion) + '</div>');
+			content.push('</div>');
+		}
 
 		content.push('<div class="modal-detail-row">');
 		content.push('<div class="modal-detail-label">Description:</div>');
 		content.push('<div class="modal-detail-value">' + escapeHtml(item.description || '—') + '</div>');
 		content.push('</div>');
 
+		const publishedRaw = item.published_date || item.published;
 		content.push('<div class="modal-detail-row">');
 		content.push('<div class="modal-detail-label">' + (config.strings.published || 'Published') + ':</div>');
-		content.push('<div class="modal-detail-value">' + escapeHtml(formatDate(item.published) || '—') + '</div>');
+		content.push('<div class="modal-detail-value">' + escapeHtml(formatDate(publishedRaw) || '—') + '</div>');
 		content.push('</div>');
 
+		const lastModifiedRaw = item.last_modified || item.last_modified_date || item.lastModified;
 		content.push('<div class="modal-detail-row">');
 		content.push('<div class="modal-detail-label">' + (config.strings.lastModified || 'Last Modified') + ':</div>');
-		content.push('<div class="modal-detail-value">' + escapeHtml(formatDate(item.lastModified) || '—') + '</div>');
+		content.push('<div class="modal-detail-value">' + escapeHtml(formatDate(lastModifiedRaw) || '—') + '</div>');
 		content.push('</div>');
 
 		if (item.references && item.references.length > 0) {

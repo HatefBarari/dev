@@ -204,6 +204,31 @@
 		$('#vortem-vulnerabilities-modal-close').on('click', function() {
 			$('#vortem-vulnerabilities-modal').hide();
 		});
+
+		// Core tab badge: open same CVE list modal as plugins (when issues exist)
+		function openWpCoreVulnerabilitiesFromBadge(e) {
+			if (e.type === 'keydown' && e.key !== 'Enter' && e.key !== ' ') {
+				return;
+			}
+			if (e.type === 'keydown') {
+				e.preventDefault();
+			}
+			const $badge = $('#vortem-wp-core-badge');
+			if (!$badge.length || !$badge.hasClass('is-clickable')) {
+				return;
+			}
+			const count = securityResultsData.filter(function(v) {
+				return (v.type || '') === 'wp-core';
+			}).length;
+			if (count < 1) {
+				return;
+			}
+			const strings = window.vortemSecurityStrings || {};
+			const coreName = strings.wordpress_core || 'WordPress Core';
+			openVulnerabilitiesDialog(coreName, 'wp-core');
+		}
+		$(document).on('click', '#vortem-wp-core-badge', openWpCoreVulnerabilitiesFromBadge);
+		$(document).on('keydown', '#vortem-wp-core-badge', openWpCoreVulnerabilitiesFromBadge);
 		
 		// Vulnerabilities severity filter
 		$('#vuln-severity-filter').on('change', function() {
@@ -424,6 +449,15 @@
 			const t = String(item.severity).toLowerCase().trim();
 			if (t === 'critical' || t === 'high' || t === 'medium' || t === 'low') severity = t;
 		}
+		// Flat wp-core/match (and similar): numeric cvss_score when severity missing or nonstandard.
+		if (severity === 'low' && item.cvss_score != null && item.cvss_score !== '') {
+			const score = parseFloat(item.cvss_score);
+			if (!isNaN(score)) {
+				if (score >= 9.0) severity = 'critical';
+				else if (score >= 7.0) severity = 'high';
+				else if (score >= 4.0) severity = 'medium';
+			}
+		}
 		if (severity === 'low' && item.classification && Array.isArray(item.classification)) {
 			const cvssItem = item.classification.find(function(c) { return c && c.key === 'CVSS'; });
 			if (cvssItem && cvssItem.value) {
@@ -462,7 +496,8 @@
 			const rawChecking = strings.checking || 'Checking...';
 			// Remove trailing dots/ellipsis so CSS can animate dots (Checking., Checking.., Checking...)
 			const checkingBase = String(rawChecking).replace(/[.\u2026]+\s*$/g, '').trim() || 'Checking';
-			$badge.addClass('is-loading').text(checkingBase);
+			$badge.addClass('is-loading').removeClass('is-clickable').removeAttr('aria-label role tabindex');
+			$badge.text(checkingBase);
 			$stats.hide();
 			return;
 		}
@@ -472,11 +507,19 @@
 		const total = wpCoreVulns.length;
 
 		if (total === 0) {
+			$badge.removeClass('is-clickable').removeAttr('aria-label role tabindex');
 			$badge.text(noIssuesText);
 			$stats.hide();
 			return;
 		}
 
+		const coreLabel = strings.wordpress_core || 'WordPress Core';
+		const foundWord = strings.found || 'Found';
+		$badge
+			.addClass('is-clickable')
+			.attr('role', 'button')
+			.attr('tabindex', '0')
+			.attr('aria-label', coreLabel + ', ' + total + ' ' + foundWord);
 		$badge.text(total + ' Found');
 		const counts = { critical: 0, high: 0, medium: 0, low: 0 };
 		wpCoreVulns.forEach(function(item) {
@@ -813,11 +856,13 @@
 				// Count vulnerabilities
 				const itemVulns = securityResultsData.filter(function(vuln) {
 					if (isTheme) {
-						return vuln.type === 'theme' && (vuln.customer_theme || '').toLowerCase() === (item.name || '').toLowerCase();
+						const vulnThemeName = (vuln.customer_theme || vuln.customer_theme_name || '').toLowerCase();
+						return vuln.type === 'theme' && vulnThemeName === (item.name || '').toLowerCase();
 					} else if (isCore) {
 						return vuln.type === 'wp-core';
 					} else {
-						return vuln.type === 'plugin' && (vuln.customer_plugin || '').toLowerCase() === (item.name || '').toLowerCase();
+						const vulnPluginName = vuln.customer_plugin_name || vuln.customer_plugin || '';
+						return vuln.type === 'plugin' && vulnPluginName.toLowerCase() === (item.name || '').toLowerCase();
 					}
 				});
 				vulnCount = itemVulns.length;
@@ -974,14 +1019,19 @@
 		const nameLower = (itemName || '').toLowerCase();
 		const itemVulns = securityResultsData.filter(function(vuln) {
 			if (vuln.type !== type) return false;
-			if (type === 'theme') {
-				return (vuln.customer_theme || '').toLowerCase() === nameLower;
+			if (type === 'wp-core') {
+				return true;
 			}
-			return (vuln.customer_plugin || '').toLowerCase() === nameLower;
+			if (type === 'theme') {
+				return (vuln.customer_theme || vuln.customer_theme_name || '').toLowerCase() === nameLower;
+			}
+			const vulnPluginName = vuln.customer_plugin_name || vuln.customer_plugin || '';
+			return vulnPluginName.toLowerCase() === nameLower;
 		});
 		
 		const strings = window.vortemSecurityStrings || {};
-		$('#vuln-modal-title').text(itemName);
+		const modalTitle = type === 'wp-core' ? (strings.wordpress_core || 'WordPress Core') : itemName;
+		$('#vuln-modal-title').text(modalTitle);
 		const totalVulnsText = strings.total_vulnerabilities || 'Total Vulnerabilities';
 		$('#vuln-modal-count').text(itemVulns.length + ' ' + totalVulnsText);
 		$('#vuln-filter-total').text(itemVulns.length);
@@ -1031,11 +1081,11 @@
 			// Header
 			const $header = $('<div>').addClass('vortem-vuln-item-header');
 			const $titleWrapper = $('<div>');
-			// Use CVE ID if available, otherwise use title
-			const vulnTitle = vuln.cve_id || vuln.title || 'N/A';
+			// Use new `cve` field, fall back to legacy `cve_id`/`title`
+			const vulnTitle = vuln.cve || vuln.cve_id || vuln.title || 'N/A';
 			$titleWrapper.append($('<h4>').addClass('vortem-vuln-item-title').text(vulnTitle));
 			const cvssLabel = strings.cvss_score_label || 'CVSS Score:';
-			// Support both cvss_score and cvss fields
+			// Prefer `cvss_score` from new spec, fall back to legacy `cvss`
 			const cvssValue = vuln.cvss_score !== undefined ? vuln.cvss_score : (vuln.cvss !== undefined ? vuln.cvss : 'N/A');
 			$titleWrapper.append($('<div>').addClass('vortem-vuln-item-cvss')
 				.html('<span class="vortem-vuln-item-cvss-label">' + cvssLabel + '</span> <span class="vortem-vuln-item-cvss-value">' + cvssValue + '</span>'));
@@ -1054,19 +1104,35 @@
 		const publishedLabel = strings.published_label || 'Published:';
 		const lastModifiedLabel = strings.last_modified_label || 'Last Modified:';
 		const referencesLabel = strings.references_label || 'References:';
-		
+		const affectedVersionLabel = strings.affected_version_label || 'Affected Version:';
+		const fixedVersionLabel = strings.fixed_version_label || 'Fixed Version:';
+
+		// Affected plugin/theme version (new field from the v1 plugin spec)
+		const affectedVersion = vuln.customer_plugin_version || vuln.customer_theme_version || vuln.customer_wordpress_version || '';
+		if (affectedVersion) {
+			$details.append($('<div>').addClass('vortem-vuln-detail-item')
+				.html('<span class="vortem-vuln-detail-label">' + affectedVersionLabel + '</span> <span class="vortem-vuln-detail-value vortem-vuln-detail-value-primary">' + escapeHtml(affectedVersion) + '</span>'));
+		}
+
+		// Fixed version (new spec uses `fixed_version`, legacy used `fixed_in`)
+		const fixedVersion = vuln.fixed_version || vuln.fixed_in || '';
+		if (fixedVersion) {
+			$details.append($('<div>').addClass('vortem-vuln-detail-item')
+				.html('<span class="vortem-vuln-detail-label">' + fixedVersionLabel + '</span> <span class="vortem-vuln-detail-value">' + escapeHtml(fixedVersion) + '</span>'));
+		}
+
 		if (vuln.cwe) {
 			$details.append($('<div>').addClass('vortem-vuln-detail-item')
 				.html('<span class="vortem-vuln-detail-label">' + cweLabel + '</span> <span class="vortem-vuln-detail-value vortem-vuln-detail-value-primary">' + escapeHtml(vuln.cwe) + '</span>'));
 		}
-		// Support both published_date and published fields
+		// New spec uses `published_date`; keep legacy `published` fallback
 		const publishedDate = vuln.published_date || vuln.published;
 		if (publishedDate) {
 			$details.append($('<div>').addClass('vortem-vuln-detail-item')
 				.html('<span class="vortem-vuln-detail-label">' + publishedLabel + '</span> <span class="vortem-vuln-detail-value">' + escapeHtml(publishedDate) + '</span>'));
 		}
-		// Support both last_modified_date and lastModified fields
-		const lastModifiedDate = vuln.last_modified_date || vuln.lastModified;
+		// New spec uses `last_modified`; keep legacy `last_modified_date`/`lastModified` fallbacks
+		const lastModifiedDate = vuln.last_modified || vuln.last_modified_date || vuln.lastModified;
 		if (lastModifiedDate) {
 			$details.append($('<div>').addClass('vortem-vuln-detail-item')
 				.html('<span class="vortem-vuln-detail-label">' + lastModifiedLabel + '</span> <span class="vortem-vuln-detail-value">' + escapeHtml(lastModifiedDate) + '</span>'));
@@ -1642,16 +1708,12 @@
 			return;
 		}
 
-		// Get current time in ISO 8601 format (real current time)
-		const now = new Date();
-		const timeString = now.toISOString();
-
+		// POST /wp-core: body matches API spec (only `wordpres-version`, same spelling as backend).
 		const requestData = {
-			'wordpres-version': wpVersion,
-			'time': timeString
+			'wordpres-version': wpVersion
 		};
 
-		VortemLogger.log('Security: Sending WP Core data - Version:', wpVersion, 'Time:', timeString);
+		VortemLogger.log('Security: Sending WP Core data - Version:', wpVersion);
 
 		// Make direct fetch request to external API
 		fetch(config.wpCoreApiUrl, {
@@ -1679,26 +1741,17 @@
 	 * Send themes data directly to external API
 	 */
 	function sendThemesToAPI(config) {
-		// Helper function to convert to lowercase and replace spaces with hyphens
-		function formatSlug(value) {
-			if (!value) return '';
-			return String(value).toLowerCase().replace(/\s+/g, '-');
-		}
-
-		// Format themes data according to API requirements
+		// POST /customer/security/wordpress/theme — themes[]: stylesheet, template, name, version, status only (see API spec).
 		const formattedThemes = allThemes.map(function(theme) {
+			const ss = theme.stylesheet != null && theme.stylesheet !== false ? String(theme.stylesheet).toLowerCase() : '';
+			const tpl = theme.template != null && theme.template !== false ? String(theme.template).toLowerCase() : '';
+			const displayName = theme.name != null && theme.name !== false ? String(theme.name) : '';
 			return {
-				stylesheet: formatSlug(theme.stylesheet),
-				template: formatSlug(theme.template),
-				name: formatSlug(theme.name),
+				stylesheet: ss,
+				template: tpl,
+				name: displayName,
 				version: theme.version !== null && theme.version !== false ? String(theme.version) : '',
-				status: (theme.status && (theme.status === 'active' || theme.status === 'inactive')) ? theme.status : 'inactive',
-				author: theme.author !== null && theme.author !== false ? String(theme.author) : '',
-				author_uri: theme.author_uri !== null && theme.author_uri !== false ? String(theme.author_uri) : '',
-				theme_uri: theme.theme_uri !== null && theme.theme_uri !== false ? String(theme.theme_uri) : '',
-				description: theme.description !== null && theme.description !== false ? String(theme.description) : '',
-				text_domain: theme.text_domain !== null && theme.text_domain !== false ? String(theme.text_domain) : '',
-				tags: (theme.tags && Array.isArray(theme.tags)) ? theme.tags : []
+				status: (theme.status && (theme.status === 'active' || theme.status === 'inactive')) ? theme.status : 'inactive'
 			};
 		});
 
@@ -2001,11 +2054,11 @@
 			let itemType = item.type || 'plugin';
 			
 			if (itemType === 'theme') {
-				itemName = item.customer_theme || item.matched_theme?.theme_name || 'Unknown Theme';
+				itemName = item.customer_theme || item.customer_theme_name || item.matched_theme?.theme_name || 'Unknown Theme';
 			} else if (itemType === 'wp-core') {
 				itemName = 'WordPress Core';
 			} else {
-				itemName = item.customer_plugin || 'Unknown Plugin';
+				itemName = item.customer_plugin_name || item.customer_plugin || 'Unknown Plugin';
 			}
 			
 			if (!itemsMap[itemName]) {
@@ -2289,12 +2342,12 @@
 		securityResultsData.forEach(function(item) {
 			let itemNameKey = '';
 			if (itemType === 'theme') {
-				itemNameKey = item.customer_theme || item.matched_theme?.theme_name || 'Unknown Theme';
+				itemNameKey = item.customer_theme || item.customer_theme_name || item.matched_theme?.theme_name || 'Unknown Theme';
 			} else if (itemType === 'wp-core') {
 				const strings = window.vortemSecurityStrings || {};
 				itemNameKey = strings.wordpress_core || 'WordPress Core';
 			} else {
-				itemNameKey = item.customer_plugin || 'Unknown Plugin';
+				itemNameKey = item.customer_plugin_name || item.customer_plugin || 'Unknown Plugin';
 			}
 			
 			// Only process items of the matching type
@@ -2426,17 +2479,19 @@
 		const severity = (vuln.severity || '').toLowerCase();
 		$item.addClass('severity-border-' + severity);
 		
-		// CVE ID and severity header
+		// CVE ID and severity header (new spec uses `cve`; legacy fallbacks kept)
 		const $header = $('<div>').addClass('vuln-item-header');
-		$header.append($('<span>').addClass('vuln-cve-id').text(vuln.cve_id || vuln.title || 'N/A'));
+		const cveLabel = vuln.cve || vuln.cve_id || vuln.title || 'N/A';
+		$header.append($('<span>').addClass('vuln-cve-id').text(cveLabel));
 		$header.append($('<span>').addClass('vuln-severity').addClass('severity-' + severity).text(vuln.severity || 'UNKNOWN'));
-		// CVSS might be a string like "2.7 (low)" or just a number
-		const cvssDisplay = typeof vuln.cvss === 'string' ? vuln.cvss : (vuln.cvss || '0.0');
+		// CVSS: prefer `cvss_score` from new spec, fall back to legacy `cvss`
+		const cvssValueRaw = vuln.cvss_score !== undefined ? vuln.cvss_score : vuln.cvss;
+		const cvssDisplay = typeof cvssValueRaw === 'string' ? cvssValueRaw : (cvssValueRaw !== undefined && cvssValueRaw !== null ? cvssValueRaw : '0.0');
 		$header.append($('<span>').addClass('vuln-cvss').text('CVSS: ' + cvssDisplay));
 		$item.append($header);
 		
 		// Title (for wp-core vulnerabilities)
-		if (vuln.title && !vuln.cve_id) {
+		if (vuln.title && !vuln.cve && !vuln.cve_id) {
 			$item.append($('<h4>').addClass('vuln-title').text(vuln.title));
 		}
 		
@@ -2444,26 +2499,37 @@
 		if (vuln.description) {
 			$item.append($('<p>').addClass('vuln-description').text(vuln.description));
 		}
-		
+
+		const strings = window.vortemSecurityStrings || {};
+
+		// Affected plugin/theme version (new field from the v1 plugin spec)
+		const affectedVersion = vuln.customer_plugin_version || vuln.customer_theme_version || vuln.customer_wordpress_version || '';
+		if (affectedVersion) {
+			const affectedVersionLabel = strings.affected_version_label || 'Affected Version';
+			$item.append($('<div>').addClass('vuln-meta').html('<strong>' + escapeHtml(affectedVersionLabel) + ':</strong> ' + escapeHtml(affectedVersion)));
+		}
+
 		// CWE
 		if (vuln.cwe) {
 			$item.append($('<div>').addClass('vuln-meta').html('<strong>CWE:</strong> ' + escapeHtml(vuln.cwe)));
 		}
-		
-		// Fixed in (for wp-core)
-		if (vuln.fixed_in) {
-			$item.append($('<div>').addClass('vuln-meta').html('<strong>Fixed in:</strong> ' + escapeHtml(vuln.fixed_in)));
+
+		// Fixed version (new spec uses `fixed_version`, legacy `fixed_in`)
+		const fixedVersion = vuln.fixed_version || vuln.fixed_in || '';
+		if (fixedVersion) {
+			const fixedVersionLabel = strings.fixed_version_label || 'Fixed Version';
+			$item.append($('<div>').addClass('vuln-meta').html('<strong>' + escapeHtml(fixedVersionLabel) + ':</strong> ' + escapeHtml(fixedVersion)));
 		}
-		
+
 		// Dates
-		const strings = window.vortemSecurityStrings || {};
 		const $metaRow = $('<div>').addClass('vuln-meta-row');
-		if (vuln.published) {
+		const publishedDate = vuln.published_date || vuln.published;
+		if (publishedDate) {
 			const publishedLabel = strings.published || 'Published';
-			$metaRow.append($('<span>').addClass('vuln-meta').html('<strong>' + escapeHtml(publishedLabel) + ':</strong> ' + formatDate(vuln.published)));
+			$metaRow.append($('<span>').addClass('vuln-meta').html('<strong>' + escapeHtml(publishedLabel) + ':</strong> ' + formatDate(publishedDate)));
 		}
-		if (vuln.lastModified || vuln.last_modified) {
-			const lastModified = vuln.lastModified || vuln.last_modified;
+		const lastModified = vuln.last_modified || vuln.lastModified;
+		if (lastModified) {
 			const lastModifiedLabel = strings.last_modified || 'Last Modified';
 			$metaRow.append($('<span>').addClass('vuln-meta').html('<strong>' + escapeHtml(lastModifiedLabel) + ':</strong> ' + formatDate(lastModified)));
 		}
@@ -2619,11 +2685,13 @@
 
 			const vulnType = vuln.type || 'plugin';
 
-			// Track items with vulnerabilities
-			if (vulnType === 'plugin' && vuln.customer_plugin) {
-				itemsWithVulns.add('plugin:' + vuln.customer_plugin.toLowerCase());
-			} else if (vulnType === 'theme' && vuln.customer_theme) {
-				itemsWithVulns.add('theme:' + vuln.customer_theme.toLowerCase());
+			// Track items with vulnerabilities (new spec uses `customer_plugin_name`)
+			const vulnPluginName = vuln.customer_plugin_name || vuln.customer_plugin;
+			if (vulnType === 'plugin' && vulnPluginName) {
+				itemsWithVulns.add('plugin:' + vulnPluginName.toLowerCase());
+			} else if (vulnType === 'theme' && (vuln.customer_theme || vuln.customer_theme_name)) {
+				const tn = vuln.customer_theme || vuln.customer_theme_name;
+				itemsWithVulns.add('theme:' + tn.toLowerCase());
 			} else if (vulnType === 'wp-core') {
 				itemsWithVulns.add('wp-core');
 			}
@@ -2785,11 +2853,11 @@
 			let itemType = vuln.type || 'plugin';
 			
 			if (itemType === 'theme') {
-				itemName = vuln.customer_theme || 'Unknown Theme';
+				itemName = vuln.customer_theme || vuln.customer_theme_name || 'Unknown Theme';
 			} else if (itemType === 'wp-core') {
 				itemName = 'WordPress Core';
 			} else {
-				itemName = vuln.customer_plugin || 'Unknown Plugin';
+				itemName = vuln.customer_plugin_name || vuln.customer_plugin || 'Unknown Plugin';
 			}
 			
 			const itemKey = itemType + ':' + itemName.toLowerCase();
@@ -2896,11 +2964,11 @@
 		// Sort by published date (most recent first) and take top 5
 		const sortedVulns = securityResultsData
 			.filter(function(vuln) {
-				return vuln.published_date || vuln.published || vuln.last_modified_date || vuln.lastModified;
+				return vuln.published_date || vuln.published || vuln.last_modified || vuln.last_modified_date || vuln.lastModified;
 			})
 			.sort(function(a, b) {
-				const aDate = new Date(a.published_date || a.published || a.last_modified_date || a.lastModified || 0);
-				const bDate = new Date(b.published_date || b.published || b.last_modified_date || b.lastModified || 0);
+				const aDate = new Date(a.published_date || a.published || a.last_modified || a.last_modified_date || a.lastModified || 0);
+				const bDate = new Date(b.published_date || b.published || b.last_modified || b.last_modified_date || b.lastModified || 0);
 				return bDate - aDate;
 			})
 			.slice(0, 5);
@@ -2912,7 +2980,7 @@
 		
 		sortedVulns.forEach(function(vuln) {
 			const severity = getSeverityFromVuln(vuln);
-			const itemName = vuln.customer_plugin || vuln.customer_theme || 'WordPress Core';
+			const itemName = vuln.customer_plugin_name || vuln.customer_plugin || vuln.customer_theme || vuln.customer_theme_name || 'WordPress Core';
 			const itemType = vuln.type || 'plugin';
 			
 			const $item = $('<div>').addClass('vortem-overview-recent-item');
@@ -2921,7 +2989,7 @@
 			$left.append($('<div>').addClass('vortem-overview-recent-item-icon').html('<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>'));
 			
 			const $info = $('<div>').addClass('vortem-overview-recent-item-info');
-			$info.append($('<p>').addClass('vortem-overview-recent-item-name').text(vuln.cve_id || vuln.title || 'Vulnerability'));
+			$info.append($('<p>').addClass('vortem-overview-recent-item-name').text(vuln.cve || vuln.cve_id || vuln.title || 'Vulnerability'));
 			$info.append($('<p>').addClass('vortem-overview-recent-item-type').text(itemName + ' · ' + itemType));
 			$left.append($info);
 			
