@@ -2917,3 +2917,90 @@ msgstr "Навсозӣ"
 
 msgid "Last updated"
 msgstr "Охирин навсозӣ"
+
+msgid "Setup"
+msgstr "Танзимот"
+
+msgid "Let's get you started"
+msgstr "Биёед, оғоз кунем"
+
+msgid "Complete setup in about 2 minutes."
+msgstr "Тақрибан дар 2 дақиқа танзимотро анҷом диҳед."
+
+msgid "Vortem's product import features need an AliExpress account."
+msgstr "Вазифаҳои воридоти маҳсулоти Vortem ҳисоби AliExpress-ро талаб мекунад."
+
+msgid "You'll connect it later under Settings → Vortem → AliExpress Integration. No account yet? You can sign up from there too."
+msgstr "Шумо онро баъдтар дар Танзимот → Vortem → Интегратсияи AliExpress пайваст мекунед. Ҳисоб надоред? Аз он ҷо низ метавонед сабт шавед."
+
+msgid "Up and running in minutes."
+msgstr "Дар чанд дақиқа омода."
+
+msgid "Built with WordPress security best practices."
+msgstr "Мутобиқ ба беҳтарин амалҳои амнияти WordPress сохта шудааст."
+
+msgid "Lightweight and tuned for WordPress."
+msgstr "Сабук ва барои WordPress мутобиқшуда."
+
+msgid "Store basics"
+msgstr "Асосҳои мағоза"
+
+msgid "Pick your store currency"
+msgstr "Асъори мағозаро интихоб кунед"
+
+msgid "This is what your customers see at checkout. You can change it later."
+msgstr "Инро мизоҷон дар пардохт мебинанд. Баъдтар тағйир додан мумкин аст."
+
+msgid "Used on product cards, cart, and checkout."
+msgstr "Дар кортҳои маҳсулот, сабад ва пардохт истифода мешавад."
+
+msgid "Almost there"
+msgstr "Қариб анҷом ёфт"
+
+msgid "Review and accept"
+msgstr "Баррасӣ ва қабул"
+
+msgid "Read the full Terms"
+msgstr "Шартҳои пурраро хонед"
+
+msgid "You agree to be bound by these terms."
+msgstr "Шумо ба ин шартҳо риоя карданро қабул мекунед."
+
+msgid "I consent to data processing"
+msgstr "Ба коркарди иттилоот розӣ ҳастам"
+
+msgid "I understand and agree that this plugin sends my site data (site URL, WordPress version, plugin version, currency preference, WooCommerce product data when importing products, order shipping information when processing orders, and plugin/theme metadata when using security features) to vortem.ai servers (https://c.vortem.ai) for processing, analytics, and service delivery. No data is sent before you provide explicit consent, and the plugin remains functional if you decline (features that depend on vortem.ai will simply be unavailable). Sending an inventory of installed plugins/themes for vulnerability lookup follows the same pattern used by Wordfence, Patchstack, WPScan, and Jetpack Protect."
+msgstr "Мефаҳмам ва розӣ ҳастам, ки ин васлка иттилооти сомонаи маро (URL, версияи WordPress, версияи васлка, интихоби асъор, иттилооти маҳсулоти WooCommerce ҳангоми воридот, иттилооти интиқол ҳангоми коркарди фармонҳо ва метаи васлка/мавзӯъ ҳангоми истифодаи хусусиятҳои амният) ба серверҳои vortem.ai (https://c.vortem.ai) барои коркард, таҳлил ва хизматрасонӣ мефиристад. Пеш аз розигии ошкор иттилоот фиристода намешавад ва васлка ҳангоми рад низ кор мекунад (хусусиятҳои вобаста ба vortem.ai дастрас намешаванд). Фиристодани рӯйхати васлка/мавзӯъҳои насбшуда барои ҷустуҷӯи заифӣ ба намунаи Wordfence, Patchstack, WPScan ва Jetpack Protect мувофиқ аст."
+
+msgid "All done"
+msgstr "Анҷом шуд"
+
+msgid "You're all set!"
+msgstr "Ҳама чиз омода аст!"
+
+msgid "Vortem is configured and ready. Connect AliExpress from Settings whenever you're ready."
+msgstr "Vortem танзим шудааст. Вақте омода шудед, AliExpress-ро аз Танзимот пайваст кунед."
+
+msgid "Accepted"
+msgstr "Қабул шуд"
+
+msgid "Consented"
+msgstr "Розигӣ дода шуд"
+
+msgid "Data processing"
+msgstr "Коркарди иттилоот"
+
+msgid "Meta Title"
+msgstr "Сарлавҳаи мета"
+
+msgid "Order"
+msgstr "Фармон"
+
+msgid "Customer"
+msgstr "Мизоҷ"
+
+msgid "Items"
+msgstr "Ашё"
+
+msgid "Payment"
+msgstr "Пардохт"

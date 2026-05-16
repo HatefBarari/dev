@@ -2932,3 +2932,90 @@ msgstr "Mettre à jour"
 
 msgid "Last updated"
 msgstr "Dernière mise à jour"
+
+msgid "Setup"
+msgstr "Configuration"
+
+msgid "Let's get you started"
+msgstr "Commençons"
+
+msgid "Complete setup in about 2 minutes."
+msgstr "Terminez la configuration en environ 2 minutes."
+
+msgid "Vortem's product import features need an AliExpress account."
+msgstr "Les fonctions d’importation de produits de Vortem nécessitent un compte AliExpress."
+
+msgid "You'll connect it later under Settings → Vortem → AliExpress Integration. No account yet? You can sign up from there too."
+msgstr "Vous le connecterez plus tard sous Réglages → Vortem → Intégration AliExpress. Pas encore de compte ? Vous pouvez aussi vous inscrire depuis là."
+
+msgid "Up and running in minutes."
+msgstr "Opérationnel en quelques minutes."
+
+msgid "Built with WordPress security best practices."
+msgstr "Conçu selon les bonnes pratiques de sécurité WordPress."
+
+msgid "Lightweight and tuned for WordPress."
+msgstr "Léger et optimisé pour WordPress."
+
+msgid "Store basics"
+msgstr "Bases de la boutique"
+
+msgid "Pick your store currency"
+msgstr "Choisissez la devise de votre boutique"
+
+msgid "This is what your customers see at checkout. You can change it later."
+msgstr "C’est ce que vos clients voient au paiement. Vous pourrez le modifier plus tard."
+
+msgid "Used on product cards, cart, and checkout."
+msgstr "Utilisé sur les fiches produit, le panier et le paiement."
+
+msgid "Almost there"
+msgstr "Presque terminé"
+
+msgid "Review and accept"
+msgstr "Vérifier et accepter"
+
+msgid "Read the full Terms"
+msgstr "Lire l’intégralité des conditions"
+
+msgid "You agree to be bound by these terms."
+msgstr "Vous acceptez d’être lié par ces conditions."
+
+msgid "I consent to data processing"
+msgstr "J’accepte le traitement des données"
+
+msgid "I understand and agree that this plugin sends my site data (site URL, WordPress version, plugin version, currency preference, WooCommerce product data when importing products, order shipping information when processing orders, and plugin/theme metadata when using security features) to vortem.ai servers (https://c.vortem.ai) for processing, analytics, and service delivery. No data is sent before you provide explicit consent, and the plugin remains functional if you decline (features that depend on vortem.ai will simply be unavailable). Sending an inventory of installed plugins/themes for vulnerability lookup follows the same pattern used by Wordfence, Patchstack, WPScan, and Jetpack Protect."
+msgstr "Je comprends et j’accepte que cette extension envoie les données de mon site (URL du site, version WordPress, version de l’extension, préférence de devise, données produits WooCommerce lors de l’import, informations d’expédition lors du traitement des commandes, et métadonnées d’extensions/thèmes lors de l’utilisation des fonctions de sécurité) aux serveurs vortem.ai (https://c.vortem.ai) pour traitement, analyses et fourniture du service. Aucune donnée n’est envoyée avant votre consentement explicite, et l’extension reste fonctionnelle si vous refusez (les fonctionnalités dépendant de vortem.ai seront simplement indisponibles). L’envoi d’un inventaire d’extensions/thèmes installés pour la recherche de vulnérabilités suit le même modèle que Wordfence, Patchstack, WPScan et Jetpack Protect."
+
+msgid "All done"
+msgstr "Terminé"
+
+msgid "You're all set!"
+msgstr "Tout est prêt !"
+
+msgid "Vortem is configured and ready. Connect AliExpress from Settings whenever you're ready."
+msgstr "Vortem est configuré et prêt. Connectez AliExpress depuis Réglages quand vous le souhaitez."
+
+msgid "Accepted"
+msgstr "Accepté"
+
+msgid "Consented"
+msgstr "Consentement donné"
+
+msgid "Data processing"
+msgstr "Traitement des données"
+
+msgid "Meta Title"
+msgstr "Titre meta"
+
+msgid "Order"
+msgstr "Commande"
+
+msgid "Customer"
+msgstr "Client"
+
+msgid "Items"
+msgstr "Articles"
+
+msgid "Payment"
+msgstr "Paiement"

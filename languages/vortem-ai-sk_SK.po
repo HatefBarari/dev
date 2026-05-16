@@ -2905,3 +2905,90 @@ msgstr "Aktualizovať"
 
 msgid "Last updated"
 msgstr "Posledná aktualizácia"
+
+msgid "Setup"
+msgstr "Nastavenie"
+
+msgid "Let's get you started"
+msgstr "Poďme na to"
+
+msgid "Complete setup in about 2 minutes."
+msgstr "Dokončite nastavenie približne za 2 minúty."
+
+msgid "Vortem's product import features need an AliExpress account."
+msgstr "Funkcie importu produktov Vortem vyžadujú účet AliExpress."
+
+msgid "You'll connect it later under Settings → Vortem → AliExpress Integration. No account yet? You can sign up from there too."
+msgstr "Pripojíte ho neskôr v Nastavenia → Vortem → Integrácia AliExpress. Ešte nemáte účet? Môžete sa zaregistrovať aj odtiaľ."
+
+msgid "Up and running in minutes."
+msgstr "Spustenie behom minút."
+
+msgid "Built with WordPress security best practices."
+msgstr "Postavené podľa osvedčených postupov zabezpečenia WordPress."
+
+msgid "Lightweight and tuned for WordPress."
+msgstr "Ľahké a ladené pre WordPress."
+
+msgid "Store basics"
+msgstr "Základy obchodu"
+
+msgid "Pick your store currency"
+msgstr "Vyberte menu obchodu"
+
+msgid "This is what your customers see at checkout. You can change it later."
+msgstr "Toto zákazníci vidia pri pokladni. Môžete to zmeniť neskôr."
+
+msgid "Used on product cards, cart, and checkout."
+msgstr "Používa sa na kartách produktov, v košíku a pri pokladni."
+
+msgid "Almost there"
+msgstr "Takmer hotovo"
+
+msgid "Review and accept"
+msgstr "Skontrolujte a akceptujte"
+
+msgid "Read the full Terms"
+msgstr "Prečítajte si celé podmienky"
+
+msgid "You agree to be bound by these terms."
+msgstr "Súhlasíte, že ste viazaní týmito podmienkami."
+
+msgid "I consent to data processing"
+msgstr "Súhlasím so spracovaním údajov"
+
+msgid "I understand and agree that this plugin sends my site data (site URL, WordPress version, plugin version, currency preference, WooCommerce product data when importing products, order shipping information when processing orders, and plugin/theme metadata when using security features) to vortem.ai servers (https://c.vortem.ai) for processing, analytics, and service delivery. No data is sent before you provide explicit consent, and the plugin remains functional if you decline (features that depend on vortem.ai will simply be unavailable). Sending an inventory of installed plugins/themes for vulnerability lookup follows the same pattern used by Wordfence, Patchstack, WPScan, and Jetpack Protect."
+msgstr "Rozumiem a súhlasím, že tento plugin odosiela údaje mojej stránky (URL stránky, verzia WordPress, verzia pluginu, preferencia meny, údaje produktov WooCommerce pri importe, informácie o doručení pri spracovaní objednávok a metadáta pluginov/tém pri použití bezpečnostných funkcií) na servery vortem.ai (https://c.vortem.ai) na spracovanie, analytiku a poskytovanie služby. Žiadne údaje sa neodosielajú pred vaším výslovným súhlasom a plugin zostane funkčný, ak odmietnete (funkcie závislé od vortem.ai nebude dostupné). Odoslanie inventára nainštalovaných pluginov/tém na vyhľadávanie zraniteľností nasleduje rovnaký model ako Wordfence, Patchstack, WPScan a Jetpack Protect."
+
+msgid "All done"
+msgstr "Hotovo"
+
+msgid "You're all set!"
+msgstr "Všetko je pripravené!"
+
+msgid "Vortem is configured and ready. Connect AliExpress from Settings whenever you're ready."
+msgstr "Vortem je nakonfigurovaný a pripravený. Pripojte AliExpress v Nastaveniach, keď budete pripravení."
+
+msgid "Accepted"
+msgstr "Prijaté"
+
+msgid "Consented"
+msgstr "Súhlas udelený"
+
+msgid "Data processing"
+msgstr "Spracovanie údajov"
+
+msgid "Meta Title"
+msgstr "Meta názov"
+
+msgid "Order"
+msgstr "Objednávka"
+
+msgid "Customer"
+msgstr "Zákazník"
+
+msgid "Items"
+msgstr "Položky"
+
+msgid "Payment"
+msgstr "Platba"

@@ -2908,3 +2908,90 @@ msgstr "อัปเดต"
 
 msgid "Last updated"
 msgstr "อัปเดตล่าสุด"
+
+msgid "Setup"
+msgstr "ตั้งค่า"
+
+msgid "Let's get you started"
+msgstr "เริ่มต้นใช้งาน"
+
+msgid "Complete setup in about 2 minutes."
+msgstr "ตั้งค่าให้เสร็จภายในราว 2 นาที"
+
+msgid "Vortem's product import features need an AliExpress account."
+msgstr "ฟีเจอร์นำเข้าสินค้าของ Vortem ต้องใช้บัญชี AliExpress"
+
+msgid "You'll connect it later under Settings → Vortem → AliExpress Integration. No account yet? You can sign up from there too."
+msgstr "คุณจะเชื่อมต่อภายหลังที่ การตั้งค่า → Vortem → การเชื่อมต่อ AliExpress ยังไม่มีบัญชี? สมัครได้จากที่นั่นเช่นกัน"
+
+msgid "Up and running in minutes."
+msgstr "พร้อมใช้งานภายในไม่กี่นาที"
+
+msgid "Built with WordPress security best practices."
+msgstr "สร้างตามแนวทางความปลอดภัยของ WordPress"
+
+msgid "Lightweight and tuned for WordPress."
+msgstr "เบาและปรับให้เหมาะกับ WordPress"
+
+msgid "Store basics"
+msgstr "พื้นฐานร้านค้า"
+
+msgid "Pick your store currency"
+msgstr "เลือกสกุลเงินของร้าน"
+
+msgid "This is what your customers see at checkout. You can change it later."
+msgstr "นี่คือสิ่งที่ลูกค้าเห็นตอนเช็คเอาต์ เปลี่ยนทีหลังได้"
+
+msgid "Used on product cards, cart, and checkout."
+msgstr "ใช้บนการ์ดสินค้า ตะกร้า และเช็คเอาต์"
+
+msgid "Almost there"
+msgstr "ใกล้เสร็จแล้ว"
+
+msgid "Review and accept"
+msgstr "ตรวจสอบและยอมรับ"
+
+msgid "Read the full Terms"
+msgstr "อ่านข้อกำหนดฉบับเต็ม"
+
+msgid "You agree to be bound by these terms."
+msgstr "คุณยอมรับผูกพันตามข้อกำหนดเหล่านี้"
+
+msgid "I consent to data processing"
+msgstr "ฉันยินยอมให้ประมวลผลข้อมูล"
+
+msgid "I understand and agree that this plugin sends my site data (site URL, WordPress version, plugin version, currency preference, WooCommerce product data when importing products, order shipping information when processing orders, and plugin/theme metadata when using security features) to vortem.ai servers (https://c.vortem.ai) for processing, analytics, and service delivery. No data is sent before you provide explicit consent, and the plugin remains functional if you decline (features that depend on vortem.ai will simply be unavailable). Sending an inventory of installed plugins/themes for vulnerability lookup follows the same pattern used by Wordfence, Patchstack, WPScan, and Jetpack Protect."
+msgstr "ฉันเข้าใจและยอมรับว่าปลั๊กอินนี้ส่งข้อมูลไซต์ของฉัน (URL ไซต์ เวอร์ชัน WordPress เวอร์ชันปลั๊กอิน การตั้งค่าสกุลเงิน ข้อมูลสินค้า WooCommerce เมื่อนำเข้า ข้อมูลการจัดส่งเมื่อประมวลผลคำสั่งซื้อ และเมตาดาต้าปลั๊กอิน/ธีมเมื่อใช้ฟีเจอร์ความปลอดภัย) ไปยังเซิร์ฟเวอร์ vortem.ai (https://c.vortem.ai) เพื่อประมวลผล การวิเคราะห์ และการให้บริการ จะไม่ส่งข้อมูลก่อนคุณให้ความยินยอมอย่างชัดเจน และปลั๊กอินยังใช้งานได้ หากคุณปฏิเสธ (ฟีเจอร์ที่พึ่งพา vortem.ai จะไม่พร้อมใช้งาน) การส่งรายการปลั๊กอิน/ธีมที่ติดตั้งเพื่อค้นหาช่องโหว่เป็นรูปแบบเดียวกับ Wordfence, Patchstack, WPScan และ Jetpack Protect"
+
+msgid "All done"
+msgstr "เสร็จสิ้น"
+
+msgid "You're all set!"
+msgstr "พร้อมแล้ว!"
+
+msgid "Vortem is configured and ready. Connect AliExpress from Settings whenever you're ready."
+msgstr "ตั้งค่า Vortem เสร็จแล้ว เชื่อม AliExpress จากการตั้งค่าเมื่อพร้อม"
+
+msgid "Accepted"
+msgstr "ยอมรับแล้ว"
+
+msgid "Consented"
+msgstr "ให้ความยินยอมแล้ว"
+
+msgid "Data processing"
+msgstr "การประมวลผลข้อมูล"
+
+msgid "Meta Title"
+msgstr "ชื่อเมตา"
+
+msgid "Order"
+msgstr "คำสั่งซื้อ"
+
+msgid "Customer"
+msgstr "ลูกค้า"
+
+msgid "Items"
+msgstr "รายการ"
+
+msgid "Payment"
+msgstr "การชำระเงิน"

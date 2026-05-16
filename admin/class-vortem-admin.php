@@ -436,6 +436,22 @@ class Vortem_Admin {
 				$vortem_strings
 			);
 
+			// Mega Dash reads window.vortemMegadashData (translated via .mo + __() above)
+			wp_localize_script(
+				'vortem-analytics-tabs',
+				'vortemMegadashData',
+				array(
+					'ajax_url'         => rest_url( 'vortem/v1/metrics/' ),
+					'nonce'            => wp_create_nonce( 'wp_rest' ),
+					'refresh_interval' => 30000,
+					'locale'           => get_locale(),
+					'currency_symbol'  => $currency_symbol,
+					'currency_pos'     => $currency_pos,
+					'current_language' => $current_language,
+					'strings'          => $vortem_strings,
+				)
+			);
+
 			// Get API base URL from settings for BI Analytics Hub
 			$api_base_url = get_option( 'vortem_bi_analytics_hub_api_base_url', Vortem_Config::get_primary_api_server() );
 

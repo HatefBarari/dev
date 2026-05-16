@@ -2917,3 +2917,90 @@ msgstr "Cusboonaysii"
 
 msgid "Last updated"
 msgstr "Markii ugu dambeysay la cusboonaysiiyay"
+
+msgid "Setup"
+msgstr "Dejinta"
+
+msgid "Let's get you started"
+msgstr "Aan bilowno"
+
+msgid "Complete setup in about 2 minutes."
+msgstr "Ku dhammaystir dejinta qiyaastii 2 daqiiqo."
+
+msgid "Vortem's product import features need an AliExpress account."
+msgstr "Muuqaalada soo dejinta alaabta Vortem waxay u baahan yihiin koonto AliExpress."
+
+msgid "You'll connect it later under Settings → Vortem → AliExpress Integration. No account yet? You can sign up from there too."
+msgstr "Waxaad ku xiri doontaa dambe goobaha → Vortem → Isdhexgalka AliExpress. Weli ma lihid koonto? Waxaad iska diiwaan gelin kartaa halkaas sidoo kale."
+
+msgid "Up and running in minutes."
+msgstr "Shaqayn daqiiqado gudahood."
+
+msgid "Built with WordPress security best practices."
+msgstr "Loo dhisay sida ugu wanaagsan ee amniga WordPress."
+
+msgid "Lightweight and tuned for WordPress."
+msgstr "Fudud oo loogu talagalay WordPress."
+
+msgid "Store basics"
+msgstr "Aasaaska dukaanka"
+
+msgid "Pick your store currency"
+msgstr "Dooro lacagta dukaanka"
+
+msgid "This is what your customers see at checkout. You can change it later."
+msgstr "Kani waa wax macaamiisha ku arkaan lacag bixinta. Waad beddeli kartaa dambe."
+
+msgid "Used on product cards, cart, and checkout."
+msgstr "Waxaa loo isticmaalaa kaararka alaabta, gaadhiga, iyo lacag bixinta."
+
+msgid "Almost there"
+msgstr "Ku dhowaad dhammaystiran"
+
+msgid "Review and accept"
+msgstr "Hubi oo aqbal"
+
+msgid "Read the full Terms"
+msgstr "Akhri Shuruudaha oo dhan"
+
+msgid "You agree to be bound by these terms."
+msgstr "Waxaad ogolaatay inaad ku xiran tahay shuruudahan."
+
+msgid "I consent to data processing"
+msgstr "Waan ogolahay in la shaqeeyo xogta"
+
+msgid "I understand and agree that this plugin sends my site data (site URL, WordPress version, plugin version, currency preference, WooCommerce product data when importing products, order shipping information when processing orders, and plugin/theme metadata when using security features) to vortem.ai servers (https://c.vortem.ai) for processing, analytics, and service delivery. No data is sent before you provide explicit consent, and the plugin remains functional if you decline (features that depend on vortem.ai will simply be unavailable). Sending an inventory of installed plugins/themes for vulnerability lookup follows the same pattern used by Wordfence, Patchstack, WPScan, and Jetpack Protect."
+msgstr "Waan fahmayaa oo waan ogolahay in kordhintaani ay u dirtaa xogta boggeyga (URL-ka bogga, nooca WordPress, nooca kordhinta, doorashada lacagta, xogta alaabta WooCommerce marka la soo dejinayo, macluumaadka maraakiibta marka la shaqaynayo amarada, iyo metadata kordhinta/naqshadeynta marka la isticmaalayo astaamaha amniga) server-yada vortem.ai (https://c.vortem.ai) si loo shaqeeyo, loo falanqeeyo, loona bixiyo adeegga. Xog lama diro ka hor ogolaanshahaaga cad, kordhinta weli way shaqeysaa haddii aad diiddo (muuqaalada ku tiirsan vortem.ai ma heli doonto). Dirida liiska kordhiyaha/naqshadeynta la rakibay raadinta nugulnimada waxay raacdaa isla qaabka Wordfence, Patchstack, WPScan, iyo Jetpack Protect."
+
+msgid "All done"
+msgstr "La dhammeeyay"
+
+msgid "You're all set!"
+msgstr "Wax walba diyaar yihiin!"
+
+msgid "Vortem is configured and ready. Connect AliExpress from Settings whenever you're ready."
+msgstr "Vortem waa la dejiyay oo diyaar yahay. Ku xir AliExpress goobaha markaad diyaar tahay."
+
+msgid "Accepted"
+msgstr "La aqbalay"
+
+msgid "Consented"
+msgstr "Ogolaansho la siiyey"
+
+msgid "Data processing"
+msgstr "Wax ka qabashada xogta"
+
+msgid "Meta Title"
+msgstr "Cinwaanka meta"
+
+msgid "Order"
+msgstr "Amar"
+
+msgid "Customer"
+msgstr "Macmiil"
+
+msgid "Items"
+msgstr "Waxyaabaha"
+
+msgid "Payment"
+msgstr "Lacag bixinta"

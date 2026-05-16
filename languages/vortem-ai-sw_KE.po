@@ -2905,3 +2905,90 @@ msgstr "Sasisha"
 
 msgid "Last updated"
 msgstr "Imesasishwa mwisho"
+
+msgid "Setup"
+msgstr "Usanidi"
+
+msgid "Let's get you started"
+msgstr "Tuanze"
+
+msgid "Complete setup in about 2 minutes."
+msgstr "Maliza usanidi kwa dakika 2 takriban."
+
+msgid "Vortem's product import features need an AliExpress account."
+msgstr "Vipengele vya kuagiza bidhaa vya Vortem vinahitaji akaunti ya AliExpress."
+
+msgid "You'll connect it later under Settings → Vortem → AliExpress Integration. No account yet? You can sign up from there too."
+msgstr "Utaunganisha baadaye chini ya Mipangilio → Vortem → Muunganisho wa AliExpress. Bado huna akaunti? Unaweza kujisajili hapo pia."
+
+msgid "Up and running in minutes."
+msgstr "Tayari kwa dakika chache."
+
+msgid "Built with WordPress security best practices."
+msgstr "Imejengwa kwa mazoea bora ya usalama wa WordPress."
+
+msgid "Lightweight and tuned for WordPress."
+msgstr "Nyepesi na imeboreshwa kwa WordPress."
+
+msgid "Store basics"
+msgstr "Misingi ya duka"
+
+msgid "Pick your store currency"
+msgstr "Chagua sarafu ya duka"
+
+msgid "This is what your customers see at checkout. You can change it later."
+msgstr "Hivi ndivyo wateja wanaona kwenye malipo. Unaweza kubadilisha baadaye."
+
+msgid "Used on product cards, cart, and checkout."
+msgstr "Inatumika kwenye kadi za bidhaa, kari na malipo."
+
+msgid "Almost there"
+msgstr "Karibu tumalize"
+
+msgid "Review and accept"
+msgstr "Kagua na kubali"
+
+msgid "Read the full Terms"
+msgstr "Soma Masharti kamili"
+
+msgid "You agree to be bound by these terms."
+msgstr "Unakubali kufungwa na masharti haya."
+
+msgid "I consent to data processing"
+msgstr "Ninaridhia usindikaji wa data"
+
+msgid "I understand and agree that this plugin sends my site data (site URL, WordPress version, plugin version, currency preference, WooCommerce product data when importing products, order shipping information when processing orders, and plugin/theme metadata when using security features) to vortem.ai servers (https://c.vortem.ai) for processing, analytics, and service delivery. No data is sent before you provide explicit consent, and the plugin remains functional if you decline (features that depend on vortem.ai will simply be unavailable). Sending an inventory of installed plugins/themes for vulnerability lookup follows the same pattern used by Wordfence, Patchstack, WPScan, and Jetpack Protect."
+msgstr "Naelewa na nakubali kuwa programu-jalizi hii inatuma data ya wavuti yangu (URL ya tovuti, toleo la WordPress, toleo la programu-jalizi, mapendeleo ya sarafu, data ya bidhaa za WooExpress wakati wa kuagiza, maelezo ya usafirishaji wakati wa kusindika maagizo, na metadata ya programu-jalizi/mandhari wakati wa kutumia vipengele vya usalama) kwa seva za vortem.ai (https://c.vortem.ai) kwa usindikaji, uchanganuzi na utoaji huduma. Hakuna data inayotumwa kabla ya ridhaa yako wazi, na programu-jalizi bado inafanya kama ukikataa (vipengele vinavyotegemea vortem.ai havitapatikana). Kutuma orodha ya programu-jalizi/mandhari yaliyosakinishwa kutafuta mapungufu kufuata mfano ule ule wa Wordfence, Patchstack, WPScan na Jetpack Protect."
+
+msgid "All done"
+msgstr "Imekamilika"
+
+msgid "You're all set!"
+msgstr "Yote tayari!"
+
+msgid "Vortem is configured and ready. Connect AliExpress from Settings whenever you're ready."
+msgstr "Vortem imesanidiwa na iko tayari. Unganisha AliExpress kutoka Mipangilio unapokuwa tayari."
+
+msgid "Accepted"
+msgstr "Imekubaliwa"
+
+msgid "Consented"
+msgstr "Ridhaa imetolewa"
+
+msgid "Data processing"
+msgstr "Usindikaji wa data"
+
+msgid "Meta Title"
+msgstr "Kichwa cha meta"
+
+msgid "Order"
+msgstr "Agizo"
+
+msgid "Customer"
+msgstr "Mteja"
+
+msgid "Items"
+msgstr "Vitu"
+
+msgid "Payment"
+msgstr "Malipo"

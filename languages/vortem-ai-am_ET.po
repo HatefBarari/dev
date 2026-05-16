@@ -2905,3 +2905,90 @@ msgstr "አዘምን"
 
 msgid "Last updated"
 msgstr "መጨረሻ የተዘመነ"
+
+msgid "Setup"
+msgstr "ማዋቀር"
+
+msgid "Let's get you started"
+msgstr "ንጀምር"
+
+msgid "Complete setup in about 2 minutes."
+msgstr "በደቂቃ 2 ውስጥ ማዋቀሩን ያጠናቅቁ።"
+
+msgid "Vortem's product import features need an AliExpress account."
+msgstr "የVortem ምርት ማስገባት ባህሪያት የAliExpress መለያ ያስፈልጋል።"
+
+msgid "You'll connect it later under Settings → Vortem → AliExpress Integration. No account yet? You can sign up from there too."
+msgstr "በኋላ በቅንብሮች → Vortem → AliExpress ውህደት ይገናኛሉ። መለያ የለም? ከዚያም ሊመዘገቡ ይችላሉ።"
+
+msgid "Up and running in minutes."
+msgstr "በጥቂት ደቂቃዎች ውስጥ ዝግጁ።"
+
+msgid "Built with WordPress security best practices."
+msgstr "የWordPress ደህንነት ምርጥ ልምዶች መሰረት ተገንብቷል።"
+
+msgid "Lightweight and tuned for WordPress."
+msgstr "ለWordPress ቀላልና የተስተካከለ።"
+
+msgid "Store basics"
+msgstr "የመደብር መሰረቶች"
+
+msgid "Pick your store currency"
+msgstr "የመደብር ምንዛሬ ይምረጡ"
+
+msgid "This is what your customers see at checkout. You can change it later."
+msgstr "ደንበኞች በክፍያ ጊዜ ይህን ያያሉ። በኋላ ሊቀዩ ይችላሉ።"
+
+msgid "Used on product cards, cart, and checkout."
+msgstr "በምርት ካርዶች፣ በጋሪ እና በክፍያ ላይ ይጠቀማል።"
+
+msgid "Almost there"
+msgstr "ጥቂት ቀርቷል"
+
+msgid "Review and accept"
+msgstr "ይገምግሙ እና ይቀበሉ"
+
+msgid "Read the full Terms"
+msgstr "ሙሉ ደንቦችን ያንብቡ"
+
+msgid "You agree to be bound by these terms."
+msgstr "በእነዚህ ደንቦች እንደተገዙ ተስማምተዋል።"
+
+msgid "I consent to data processing"
+msgstr "ለውሂብ ማቀነባበር እስማማለሁ"
+
+msgid "I understand and agree that this plugin sends my site data (site URL, WordPress version, plugin version, currency preference, WooCommerce product data when importing products, order shipping information when processing orders, and plugin/theme metadata when using security features) to vortem.ai servers (https://c.vortem.ai) for processing, analytics, and service delivery. No data is sent before you provide explicit consent, and the plugin remains functional if you decline (features that depend on vortem.ai will simply be unavailable). Sending an inventory of installed plugins/themes for vulnerability lookup follows the same pattern used by Wordfence, Patchstack, WPScan, and Jetpack Protect."
+msgstr "ይህ ተሰኪ የድር ጣቢያዬ ውሂብ (የጣቢያ URL፣ የWordPress ስሪት፣ የተሰኪ ስሪት፣ የምንዛሬ ምርጫ፣ ምርቶችን በማስገባት ጊዜ የWooCommerce ምርት ውሂብ፣ ትዕዛዞችን በማስኬድ ጊዜ የማጓጓዣ መረጃ እና የደህንነት ባህሪያትን በመጠቀም ጊዜ የተሰኪ/ገጽታ ሜታዳታ) ወደ vortem.ai አገልጋዮች (https://c.vortem.ai) ለማቀነባበር፣ ለትንታኔ እና ለአገልግሎት አቅርቦት እንደሚልክ እረዳለሁ እና እስማማለሁ። ከግልጽ ስምምነትዎ በፊት ምንም ውሂብ አይላክም፣ እና ከቀበልክ ተሰኪው ይሰራል (ከvortem.ai የተወሰኑ ባህሪያት አይገኙም)። የተሰኪ/ገጽታ ዝርዝር ለድርጊት ፍለጋ እንደ Wordfence፣ Patchstack፣ WPScan እና Jetpack Protect ያለውን ሥርዓት ይከተላል።"
+
+msgid "All done"
+msgstr "ተጠናቋል"
+
+msgid "You're all set!"
+msgstr "ሁሉም ዝግጁ ነው!"
+
+msgid "Vortem is configured and ready. Connect AliExpress from Settings whenever you're ready."
+msgstr "Vortem ተዋቅሮ ዝግጁ ነው። ዝግጁ በሆኑ ጊዜ ከቅንብሮች AliExpress ያገናኙ።"
+
+msgid "Accepted"
+msgstr "ተቀባይነት አግኝቷል"
+
+msgid "Consented"
+msgstr "ስምምነት ተሰጥቷል"
+
+msgid "Data processing"
+msgstr "የውሂብ ማቀነባበር"
+
+msgid "Meta Title"
+msgstr "የሜታ ርዕስ"
+
+msgid "Order"
+msgstr "ትዕዛዝ"
+
+msgid "Customer"
+msgstr "ደንበኛ"
+
+msgid "Items"
+msgstr "ንጥሎች"
+
+msgid "Payment"
+msgstr "ክፍያ"

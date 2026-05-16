@@ -2905,3 +2905,90 @@ msgstr "আপডেট"
 
 msgid "Last updated"
 msgstr "শেষ আপডেট"
+
+msgid "Setup"
+msgstr "সেটআপ"
+
+msgid "Let's get you started"
+msgstr "চলুন শুরু করি"
+
+msgid "Complete setup in about 2 minutes."
+msgstr "প্রায় ২ মিনিটে সেটআপ সম্পূর্ণ করুন।"
+
+msgid "Vortem's product import features need an AliExpress account."
+msgstr "Vortem-এর পণ্য আমদানি বৈশিষ্ট্যের জন্য AliExpress অ্যাকাউন্ট প্রয়োজন।"
+
+msgid "You'll connect it later under Settings → Vortem → AliExpress Integration. No account yet? You can sign up from there too."
+msgstr "আপনি পরে সেটিংস → Vortem → AliExpress ইন্টিগ্রেশনে সংযুক্ত করবেন। অ্যাকাউন্ট নেই? সেখান থেকেও সাইন আপ করতে পারেন।"
+
+msgid "Up and running in minutes."
+msgstr "কয়েক মিনিটের মধ্যে চালু।"
+
+msgid "Built with WordPress security best practices."
+msgstr "WordPress নিরাপত্তা সেরা অনুশীলন অনুযায়ী তৈরি।"
+
+msgid "Lightweight and tuned for WordPress."
+msgstr "হালকা এবং WordPress-এর জন্য টিউন করা।"
+
+msgid "Store basics"
+msgstr "স্টোরের মৌলিক বিষয়"
+
+msgid "Pick your store currency"
+msgstr "আপনার স্টোরের মুদ্রা বেছে নিন"
+
+msgid "This is what your customers see at checkout. You can change it later."
+msgstr "চেকআউটে আপনার গ্রাহকরা এটি দেখেন। পরে পরিবর্তন করতে পারেন।"
+
+msgid "Used on product cards, cart, and checkout."
+msgstr "পণ্য কার্ড, কার্ট এবং চেকআউটে ব্যবহৃত হয়।"
+
+msgid "Almost there"
+msgstr "প্রায় শেষ"
+
+msgid "Review and accept"
+msgstr "পর্যালোচনা করুন এবং গ্রহণ করুন"
+
+msgid "Read the full Terms"
+msgstr "সম্পূর্ণ শর্তাবলী পড়ুন"
+
+msgid "You agree to be bound by these terms."
+msgstr "আপনি এই শর্তাবলীতে আবদ্ধ হতে সম্মত।"
+
+msgid "I consent to data processing"
+msgstr "আমি ডেটা প্রক্রিয়াকরণে সম্মতি দিচ্ছি"
+
+msgid "I understand and agree that this plugin sends my site data (site URL, WordPress version, plugin version, currency preference, WooCommerce product data when importing products, order shipping information when processing orders, and plugin/theme metadata when using security features) to vortem.ai servers (https://c.vortem.ai) for processing, analytics, and service delivery. No data is sent before you provide explicit consent, and the plugin remains functional if you decline (features that depend on vortem.ai will simply be unavailable). Sending an inventory of installed plugins/themes for vulnerability lookup follows the same pattern used by Wordfence, Patchstack, WPScan, and Jetpack Protect."
+msgstr "আমি বুঝি এবং সম্মত যে এই প্লাগইনটি আমার সাইটের ডেটা (সাইট URL, WordPress সংস্করণ, প্লাগইন সংস্করণ, মুদ্রার পছন্দ, পণ্য আমদানির সময় WooCommerce পণ্য ডেটা, অর্ডার প্রক্রিয়াকরণে শিপিং তথ্য এবং নিরাপত্তা বৈশিষ্ট্য ব্যবহারের সময় প্লাগইন/থিম মেটাডেটা) vortem.ai সার্ভারে (https://c.vortem.ai) প্রক্রিয়াকরণ, বিশ্লেষণ ও সেবা সরবরাহের জন্য পাঠায়। আপনার স্পষ্ট সম্মতি ছাড়া কোনো ডেটা পাঠানো হয় না, এবং আপনি অস্বীকার করলেও প্লাগইন কাজ করে (vortem.ai-নির্ভর বৈশিষ্ট্য অনুপলব্ধ হবে)। ইনস্টল করা প্লাগইন/থিমের তালিকা পাঠিয়ে দুর্বলতা খোঁজা Wordfence, Patchstack, WPScan এবং Jetpack Protect-এর মতোই।"
+
+msgid "All done"
+msgstr "সম্পন্ন"
+
+msgid "You're all set!"
+msgstr "সব প্রস্তুত!"
+
+msgid "Vortem is configured and ready. Connect AliExpress from Settings whenever you're ready."
+msgstr "Vortem কনফিগার করা হয়েছে। প্রস্তুত হলে সেটিংস থেকে AliExpress সংযুক্ত করুন।"
+
+msgid "Accepted"
+msgstr "গৃহীত"
+
+msgid "Consented"
+msgstr "সম্মতি দেওয়া হয়েছে"
+
+msgid "Data processing"
+msgstr "ডেটা প্রক্রিয়াকরণ"
+
+msgid "Meta Title"
+msgstr "মেটা শিরোনাম"
+
+msgid "Order"
+msgstr "অর্ডার"
+
+msgid "Customer"
+msgstr "গ্রাহক"
+
+msgid "Items"
+msgstr "আইটেম"
+
+msgid "Payment"
+msgstr "পেমেন্ট"

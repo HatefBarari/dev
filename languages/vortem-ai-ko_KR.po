@@ -2917,3 +2917,90 @@ msgstr "업데이트"
 
 msgid "Last updated"
 msgstr "마지막 업데이트"
+
+msgid "Setup"
+msgstr "설정"
+
+msgid "Let's get you started"
+msgstr "시작해 보세요"
+
+msgid "Complete setup in about 2 minutes."
+msgstr "약 2분 안에 설정을 완료하세요."
+
+msgid "Vortem's product import features need an AliExpress account."
+msgstr "Vortem의 제품 가져오기 기능에는 AliExpress 계정이 필요합니다."
+
+msgid "You'll connect it later under Settings → Vortem → AliExpress Integration. No account yet? You can sign up from there too."
+msgstr "나중에 설정 → Vortem → AliExpress 연동에서 연결합니다. 계정이 없으시면 거기서 가입할 수도 있습니다."
+
+msgid "Up and running in minutes."
+msgstr "몇 분 안에 바로 사용할 수 있습니다."
+
+msgid "Built with WordPress security best practices."
+msgstr "WordPress 보안 모범 사례를 따릅니다."
+
+msgid "Lightweight and tuned for WordPress."
+msgstr "가볍고 WordPress에 맞게 조정되었습니다."
+
+msgid "Store basics"
+msgstr "스토어 기본 정보"
+
+msgid "Pick your store currency"
+msgstr "스토어 통화 선택"
+
+msgid "This is what your customers see at checkout. You can change it later."
+msgstr "결제 시 고객에게 표시되는 금액입니다. 나중에 변경할 수 있습니다."
+
+msgid "Used on product cards, cart, and checkout."
+msgstr "상품 카드, 장바구니, 결제에 사용됩니다."
+
+msgid "Almost there"
+msgstr "거의 완료"
+
+msgid "Review and accept"
+msgstr "검토 후 동의"
+
+msgid "Read the full Terms"
+msgstr "약관 전문 읽기"
+
+msgid "You agree to be bound by these terms."
+msgstr "이 약관에 구속되는 데 동의합니다."
+
+msgid "I consent to data processing"
+msgstr "데이터 처리에 동의합니다"
+
+msgid "I understand and agree that this plugin sends my site data (site URL, WordPress version, plugin version, currency preference, WooCommerce product data when importing products, order shipping information when processing orders, and plugin/theme metadata when using security features) to vortem.ai servers (https://c.vortem.ai) for processing, analytics, and service delivery. No data is sent before you provide explicit consent, and the plugin remains functional if you decline (features that depend on vortem.ai will simply be unavailable). Sending an inventory of installed plugins/themes for vulnerability lookup follows the same pattern used by Wordfence, Patchstack, WPScan, and Jetpack Protect."
+msgstr "이 플러그인이 내 사이트 데이터(사이트 URL, WordPress 버전, 플러그인 버전, 통화 설정, 제품 가져올 때 WooCommerce 제품 데이터, 주문 처리 시 배송 정보, 보안 기능 사용 시 플러그인/테마 메타데이터)를 처리, 분석 및 서비스 제공을 위해 vortem.ai 서버(https://c.vortem.ai)로 보내는 것을 이해하고 동의합니다. 명시적 동의 전에는 데이터가 전송되지 않으며 거부해도 플러그인은 작동합니다(vortem.ai에 의존하는 기능은 사용할 수 없음). 설치된 플러그인/테마 목록을 취약점 조회를 위해 보내는 것은 Wordfence, Patchstack, WPScan, Jetpack Protect와 같은 방식입니다."
+
+msgid "All done"
+msgstr "완료"
+
+msgid "You're all set!"
+msgstr "모든 준비가 끝났습니다!"
+
+msgid "Vortem is configured and ready. Connect AliExpress from Settings whenever you're ready."
+msgstr "Vortem이 구성되었습니다. 준비되면 설정에서 AliExpress를 연결하세요."
+
+msgid "Accepted"
+msgstr "승인됨"
+
+msgid "Consented"
+msgstr "동의함"
+
+msgid "Data processing"
+msgstr "데이터 처리"
+
+msgid "Meta Title"
+msgstr "메타 제목"
+
+msgid "Order"
+msgstr "주문"
+
+msgid "Customer"
+msgstr "고객"
+
+msgid "Items"
+msgstr "항목"
+
+msgid "Payment"
+msgstr "결제"

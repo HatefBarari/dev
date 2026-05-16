@@ -2908,3 +2908,90 @@ msgstr "Yangilash"
 
 msgid "Last updated"
 msgstr "Oxirgi yangilanish"
+
+msgid "Setup"
+msgstr "Sozlash"
+
+msgid "Let's get you started"
+msgstr "Keling, boshlaylik"
+
+msgid "Complete setup in about 2 minutes."
+msgstr "Taxminan 2 daqiqada sozlashni yakunlang."
+
+msgid "Vortem's product import features need an AliExpress account."
+msgstr "Vortem mahsulot import funksiyalari AliExpress hisobini talab qiladi."
+
+msgid "You'll connect it later under Settings → Vortem → AliExpress Integration. No account yet? You can sign up from there too."
+msgstr "Uni keyinroq Sozlamalar → Vortem → AliExpress integratsiyasi orqali ulaysiz. Hisob yo‘qmi? U yerdan ham ro‘yxatdan o‘tishingiz mumkin."
+
+msgid "Up and running in minutes."
+msgstr "Bir necha daqiqada ishga tayyor."
+
+msgid "Built with WordPress security best practices."
+msgstr "WordPress xavfsizligi eng yaxshi amaliyotlariga muvofiq qurilgan."
+
+msgid "Lightweight and tuned for WordPress."
+msgstr "Yengil va WordPress uchun sozlangan."
+
+msgid "Store basics"
+msgstr "Do‘kon asoslari"
+
+msgid "Pick your store currency"
+msgstr "Do‘kon valyutasini tanlang"
+
+msgid "This is what your customers see at checkout. You can change it later."
+msgstr "Mijozlar to‘lovda shuni ko‘radi. Keyinroq o‘zgartirish mumkin."
+
+msgid "Used on product cards, cart, and checkout."
+msgstr "Mahsulot kartalari, savat va to‘lovda ishlatiladi."
+
+msgid "Almost there"
+msgstr "Deyarli tugadi"
+
+msgid "Review and accept"
+msgstr "Ko‘rib chiqing va qabul qiling"
+
+msgid "Read the full Terms"
+msgstr "To‘liq shartlarni o‘qing"
+
+msgid "You agree to be bound by these terms."
+msgstr "Siz ushbu shartlarga rioya qilishga rozilik bildirasiz."
+
+msgid "I consent to data processing"
+msgstr "Ma’lumotlarni qayta ishlashga roziman"
+
+msgid "I understand and agree that this plugin sends my site data (site URL, WordPress version, plugin version, currency preference, WooCommerce product data when importing products, order shipping information when processing orders, and plugin/theme metadata when using security features) to vortem.ai servers (https://c.vortem.ai) for processing, analytics, and service delivery. No data is sent before you provide explicit consent, and the plugin remains functional if you decline (features that depend on vortem.ai will simply be unavailable). Sending an inventory of installed plugins/themes for vulnerability lookup follows the same pattern used by Wordfence, Patchstack, WPScan, and Jetpack Protect."
+msgstr "Men tushunaman va roziman: ushbu plagin saytim ma’lumotlarini (sayt URL, WordPress versiyasi, plagin versiyasi, valyuta afzalligi, importda WooCommerce mahsulot ma’lumotlari, buyurtmalarni qayta ishlashda yetkazib berish ma’lumotlari va xavfsizlik funksiyalaridan foydalanishda plagin/tema metama’lumotlari) qayta ishlash, tahlil va xizmat ko‘rsatish uchun vortem.ai serverlariga (https://c.vortem.ai) yuboradi. Aniq roziligingizdan oldin ma’lumot yuborilmaydi, rad etsangiz ham plagin ishlaydi (vortem.ai ga bog‘liq funksiyalar mavjud bo‘lmaydi). O‘rnatilgan plagin/temalar ro‘yxatini zaiflik qidirish uchun yuborish Wordfence, Patchstack, WPScan va Jetpack Protect bilan bir xil namunani kuzatadi."
+
+msgid "All done"
+msgstr "Tugadi"
+
+msgid "You're all set!"
+msgstr "Hammasi tayyor!"
+
+msgid "Vortem is configured and ready. Connect AliExpress from Settings whenever you're ready."
+msgstr "Vortem sozlangan va tayyor. Tayyor bo‘lganingizda Sozlamalardan AliExpressni ulang."
+
+msgid "Accepted"
+msgstr "Qabul qilindi"
+
+msgid "Consented"
+msgstr "Rozilik berildi"
+
+msgid "Data processing"
+msgstr "Ma’lumotlarni qayta ishlash"
+
+msgid "Meta Title"
+msgstr "Meta sarlavha"
+
+msgid "Order"
+msgstr "Buyurtma"
+
+msgid "Customer"
+msgstr "Mijoz"
+
+msgid "Items"
+msgstr "Elementlar"
+
+msgid "Payment"
+msgstr "To‘lov"

@@ -92,10 +92,11 @@
 
             // Set up vortemMegadashData for the existing script
             // Use existing vortemMegadashData if available (from wp_localize_script), otherwise create new one
-            // Get translated strings from vortemAnalyticsTabsMegadashStrings if available
-            const megadashStrings = (typeof vortemAnalyticsTabsMegadashStrings !== 'undefined' && vortemAnalyticsTabsMegadashStrings)
-                ? vortemAnalyticsTabsMegadashStrings
-                : {};
+            const megadashStrings = (typeof vortemAnalyticsTabsStrings !== 'undefined' && vortemAnalyticsTabsStrings)
+                ? vortemAnalyticsTabsStrings
+                : (typeof vortemAnalyticsTabsMegadashStrings !== 'undefined' && vortemAnalyticsTabsMegadashStrings)
+                    ? vortemAnalyticsTabsMegadashStrings
+                    : (window.vortemMegadashData && window.vortemMegadashData.strings) || {};
             
             if (typeof window.vortemMegadashData === 'undefined') {
                 window.vortemMegadashData = {
@@ -110,7 +111,7 @@
                 };
             } else {
                 // Update existing vortemMegadashData with current config values if needed
-                // Merge strings from vortemAnalyticsTabsMegadashStrings with existing strings
+                // Merge localized strings with any existing values
                 window.vortemMegadashData.ajax_url = window.vortemMegadashData.ajax_url || vortemAnalyticsTabsConfig.restUrl;
                 window.vortemMegadashData.nonce = window.vortemMegadashData.nonce || vortemAnalyticsTabsConfig.nonce;
                 window.vortemMegadashData.locale = window.vortemMegadashData.locale || vortemAnalyticsTabsConfig.locale;

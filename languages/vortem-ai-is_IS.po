@@ -2911,3 +2911,90 @@ msgstr "Uppfæra"
 
 msgid "Last updated"
 msgstr "Síðast uppfært"
+
+msgid "Setup"
+msgstr "Uppsetning"
+
+msgid "Let's get you started"
+msgstr "Byrjum"
+
+msgid "Complete setup in about 2 minutes."
+msgstr "Ljúktu við uppsetningu á um 2 mínútum."
+
+msgid "Vortem's product import features need an AliExpress account."
+msgstr "Vöruinnflutnings eiginleikar Vortem krefjast AliExpress reiknings."
+
+msgid "You'll connect it later under Settings → Vortem → AliExpress Integration. No account yet? You can sign up from there too."
+msgstr "Þú tengir hann síðar undir Stillingar → Vortem → AliExpress samþætting. Enginn reikningur ennþá? Þú getur líka skráð þig þaðan."
+
+msgid "Up and running in minutes."
+msgstr "Í gangi á nokkrum mínútum."
+
+msgid "Built with WordPress security best practices."
+msgstr "Byggt með öryggisvenjum WordPress að leiðarljósi."
+
+msgid "Lightweight and tuned for WordPress."
+msgstr "Létt og stillt fyrir WordPress."
+
+msgid "Store basics"
+msgstr "Grunnur verslunar"
+
+msgid "Pick your store currency"
+msgstr "Veldu gjaldmiðil verslunar"
+
+msgid "This is what your customers see at checkout. You can change it later."
+msgstr "Þetta sjá viðskiptavinir við greiðslu. Hægt er að breyta síðar."
+
+msgid "Used on product cards, cart, and checkout."
+msgstr "Notað á vörukortum, í körfu og við greiðslu."
+
+msgid "Almost there"
+msgstr "Næstum klárt"
+
+msgid "Review and accept"
+msgstr "Yfirfara og samþykkja"
+
+msgid "Read the full Terms"
+msgstr "Lesa skilmálana að fullu"
+
+msgid "You agree to be bound by these terms."
+msgstr "Þú samþykkir að vera bundinn þessum skilmálum."
+
+msgid "I consent to data processing"
+msgstr "Ég veiti samþykki fyrir vinnslu gagna"
+
+msgid "I understand and agree that this plugin sends my site data (site URL, WordPress version, plugin version, currency preference, WooCommerce product data when importing products, order shipping information when processing orders, and plugin/theme metadata when using security features) to vortem.ai servers (https://c.vortem.ai) for processing, analytics, and service delivery. No data is sent before you provide explicit consent, and the plugin remains functional if you decline (features that depend on vortem.ai will simply be unavailable). Sending an inventory of installed plugins/themes for vulnerability lookup follows the same pattern used by Wordfence, Patchstack, WPScan, and Jetpack Protect."
+msgstr "Ég skil og samþykki að þessi viðbót sendi gögn vefsíðu minnar (vefslóð, útgáfa WordPress, útgáfa viðbótar, gjaldmiðilsval, WooCommerce vörugögn við innflutning, sendingarupplýsingar við meðhöndlun pantana og lýsigögn viðbóta/eða þema þegar öryggiseiginleikar eru notaðir) á netþjóna vortem.ai (https://c.vortem.ai) til vinnslu, greiningar og þjónustu. Engin gögn eru send fyrr en þú veitir skýrt samþykki, og viðbótin virkar enn ef þú hafnar (eiginleikar sem byggja á vortem.ai verða þá ekki tiltækir). Að senda yfirlit yfir uppsettar viðbætur/þemu til að leita að veikleikum fylgir sama mynstri og Wordfence, Patchstack, WPScan og Jetpack Protect."
+
+msgid "All done"
+msgstr "Lokið"
+
+msgid "You're all set!"
+msgstr "Allt klappar og kallar!"
+
+msgid "Vortem is configured and ready. Connect AliExpress from Settings whenever you're ready."
+msgstr "Vortem er stillt og tilbúið. Tengdu AliExpress í Stillingum þegar þú ert til."
+
+msgid "Accepted"
+msgstr "Samþykkt"
+
+msgid "Consented"
+msgstr "Samþykki veitt"
+
+msgid "Data processing"
+msgstr "Vinnsla gagna"
+
+msgid "Meta Title"
+msgstr "Lýsingartitill"
+
+msgid "Order"
+msgstr "Pöntun"
+
+msgid "Customer"
+msgstr "Viðskiptavinur"
+
+msgid "Items"
+msgstr "Línur"
+
+msgid "Payment"
+msgstr "Greiðsla"

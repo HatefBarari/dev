@@ -2905,3 +2905,90 @@ msgstr "更新"
 
 msgid "Last updated"
 msgstr "最后更新"
+
+msgid "Setup"
+msgstr "设置"
+
+msgid "Let's get you started"
+msgstr "让我们开始吧"
+
+msgid "Complete setup in about 2 minutes."
+msgstr "大约 2 分钟完成设置。"
+
+msgid "Vortem's product import features need an AliExpress account."
+msgstr "Vortem 的产品导入功能需要 AliExpress 账户。"
+
+msgid "You'll connect it later under Settings → Vortem → AliExpress Integration. No account yet? You can sign up from there too."
+msgstr "您稍后在 设置 → Vortem → AliExpress 集成 中连接。还没有账户？也可以在那里注册。"
+
+msgid "Up and running in minutes."
+msgstr "几分钟即可上线。"
+
+msgid "Built with WordPress security best practices."
+msgstr "遵循 WordPress 安全最佳实践构建。"
+
+msgid "Lightweight and tuned for WordPress."
+msgstr "轻量并为 WordPress 优化。"
+
+msgid "Store basics"
+msgstr "商店基础"
+
+msgid "Pick your store currency"
+msgstr "选择商店货币"
+
+msgid "This is what your customers see at checkout. You can change it later."
+msgstr "这是客户在结账时看到的内容。您可以稍后更改。"
+
+msgid "Used on product cards, cart, and checkout."
+msgstr "用于商品卡片、购物车和结账。"
+
+msgid "Almost there"
+msgstr "快完成了"
+
+msgid "Review and accept"
+msgstr "审阅并接受"
+
+msgid "Read the full Terms"
+msgstr "阅读完整条款"
+
+msgid "You agree to be bound by these terms."
+msgstr "您同意受这些条款约束。"
+
+msgid "I consent to data processing"
+msgstr "我同意数据处理"
+
+msgid "I understand and agree that this plugin sends my site data (site URL, WordPress version, plugin version, currency preference, WooCommerce product data when importing products, order shipping information when processing orders, and plugin/theme metadata when using security features) to vortem.ai servers (https://c.vortem.ai) for processing, analytics, and service delivery. No data is sent before you provide explicit consent, and the plugin remains functional if you decline (features that depend on vortem.ai will simply be unavailable). Sending an inventory of installed plugins/themes for vulnerability lookup follows the same pattern used by Wordfence, Patchstack, WPScan, and Jetpack Protect."
+msgstr "我理解并同意此插件将我的站点数据（站点 URL、WordPress 版本、插件版本、货币偏好、导入产品时的 WooCommerce 产品数据、处理订单时的配送信息以及使用安全功能时的插件/主题元数据）发送至 vortem.ai 服务器（https://c.vortem.ai）以进行处理、分析和提供服务。在您明确同意之前不会发送任何数据；若您拒绝，插件仍可使用（依赖 vortem.ai 的功能将不可用）。发送已安装插件/主题清单以查找漏洞的方式与 Wordfence、Patchstack、WPScan 和 Jetpack Protect 相同。"
+
+msgid "All done"
+msgstr "全部完成"
+
+msgid "You're all set!"
+msgstr "一切就绪！"
+
+msgid "Vortem is configured and ready. Connect AliExpress from Settings whenever you're ready."
+msgstr "Vortem 已配置完成。准备好后请在设置中连接 AliExpress。"
+
+msgid "Accepted"
+msgstr "已接受"
+
+msgid "Consented"
+msgstr "已同意"
+
+msgid "Data processing"
+msgstr "数据处理"
+
+msgid "Meta Title"
+msgstr "元标题"
+
+msgid "Order"
+msgstr "订单"
+
+msgid "Customer"
+msgstr "客户"
+
+msgid "Items"
+msgstr "商品"
+
+msgid "Payment"
+msgstr "付款"

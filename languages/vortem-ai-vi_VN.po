@@ -2905,3 +2905,90 @@ msgstr "Cập nhật"
 
 msgid "Last updated"
 msgstr "Cập nhật lần cuối"
+
+msgid "Setup"
+msgstr "Thiết lập"
+
+msgid "Let's get you started"
+msgstr "Bắt đầu nào"
+
+msgid "Complete setup in about 2 minutes."
+msgstr "Hoàn tất thiết lập trong khoảng 2 phút."
+
+msgid "Vortem's product import features need an AliExpress account."
+msgstr "Tính năng nhập sản phẩm của Vortem cần tài khoản AliExpress."
+
+msgid "You'll connect it later under Settings → Vortem → AliExpress Integration. No account yet? You can sign up from there too."
+msgstr "Bạn sẽ kết nối sau tại Cài đặt → Vortem → Tích hợp AliExpress. Chưa có tài khoản? Bạn cũng có thể đăng ký từ đó."
+
+msgid "Up and running in minutes."
+msgstr "Sẵn sàng chỉ trong vài phút."
+
+msgid "Built with WordPress security best practices."
+msgstr "Được xây dựng theo các thực hành bảo mật tốt nhất của WordPress."
+
+msgid "Lightweight and tuned for WordPress."
+msgstr "Nhẹ và tối ưu cho WordPress."
+
+msgid "Store basics"
+msgstr "Cơ bản cửa hàng"
+
+msgid "Pick your store currency"
+msgstr "Chọn tiền tệ cửa hàng"
+
+msgid "This is what your customers see at checkout. You can change it later."
+msgstr "Đây là điều khách hàng thấy khi thanh toán. Bạn có thể đổi sau."
+
+msgid "Used on product cards, cart, and checkout."
+msgstr "Dùng trên thẻ sản phẩm, giỏ hàng và thanh toán."
+
+msgid "Almost there"
+msgstr "Sắp xong"
+
+msgid "Review and accept"
+msgstr "Xem lại và chấp nhận"
+
+msgid "Read the full Terms"
+msgstr "Đọc toàn bộ Điều khoản"
+
+msgid "You agree to be bound by these terms."
+msgstr "Bạn đồng ý bị ràng buộc bởi các điều khoản này."
+
+msgid "I consent to data processing"
+msgstr "Tôi đồng ý cho xử lý dữ liệu"
+
+msgid "I understand and agree that this plugin sends my site data (site URL, WordPress version, plugin version, currency preference, WooCommerce product data when importing products, order shipping information when processing orders, and plugin/theme metadata when using security features) to vortem.ai servers (https://c.vortem.ai) for processing, analytics, and service delivery. No data is sent before you provide explicit consent, and the plugin remains functional if you decline (features that depend on vortem.ai will simply be unavailable). Sending an inventory of installed plugins/themes for vulnerability lookup follows the same pattern used by Wordfence, Patchstack, WPScan, and Jetpack Protect."
+msgstr "Tôi hiểu và đồng ý rằng plugin này gửi dữ liệu trang web của tôi (URL trang web, phiên bản WordPress, phiên bản plugin, tùy chọn tiền tệ, dữ liệu sản phẩm WooCommerce khi nhập, thông tin vận chuyển khi xử lý đơn hàng và siêu dữ liệu plugin/chủ đề khi dùng tính năng bảo mật) tới máy chủ vortem.ai (https://c.vortem.ai) để xử lý, phân tích và cung cấp dịch vụ. Không có dữ liệu nào được gửi trước khi bạn đồng ý rõ ràng, và plugin vẫn hoạt động nếu bạn từ chối (các tính năng phụ thuộc vortem.ai sẽ không khả dụng). Gửi danh sách plugin/chủ đề đã cài để tra cứu lỗ hổng theo cùng mô hình như Wordfence, Patchstack, WPScan và Jetpack Protect."
+
+msgid "All done"
+msgstr "Xong rồi"
+
+msgid "You're all set!"
+msgstr "Mọi thứ đã sẵn sàng!"
+
+msgid "Vortem is configured and ready. Connect AliExpress from Settings whenever you're ready."
+msgstr "Vortem đã được cấu hình và sẵn sàng. Kết nối AliExpress trong Cài đặt khi bạn muốn."
+
+msgid "Accepted"
+msgstr "Đã chấp nhận"
+
+msgid "Consented"
+msgstr "Đã đồng ý"
+
+msgid "Data processing"
+msgstr "Xử lý dữ liệu"
+
+msgid "Meta Title"
+msgstr "Tiêu đề meta"
+
+msgid "Order"
+msgstr "Đơn hàng"
+
+msgid "Customer"
+msgstr "Khách hàng"
+
+msgid "Items"
+msgstr "Mặt hàng"
+
+msgid "Payment"
+msgstr "Thanh toán"
